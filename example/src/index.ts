@@ -1,4 +1,4 @@
-import vuePlugin from '../../src/lib/';
+import notivuecation from '../../';
 
 declare const Vue;
 declare const Vuex;
@@ -6,7 +6,7 @@ declare const Vuex;
 Vue.use(Vuex);
 const store = new Vuex.Store();
 
-Vue.use(vuePlugin, { store });
+Vue.use(notivuecation, { store });
 
 new Vue({
   el: '#app',
