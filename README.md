@@ -27,8 +27,10 @@ Add the component to wherever you want it to render:
 
 Open the notifications from any Vue component:
 ```javascript
-this.$confirm('Are you sure?').then(result => {
-  // result is either true or false
+this.$confirm({ message: 'Are you sure?'}).then(result => {
+  // result is true/false
 });
 ```
 
+## alert and confirm
+Two methods will be added to every Vue component: `$alert` and `$confirm` which both mimic their native counterparts.
