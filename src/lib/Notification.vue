@@ -25,7 +25,7 @@
   export default {
     data() {
       return {
-        NotificationType: NotificationType,
+        NotificationType,
       };
     },
     methods: {

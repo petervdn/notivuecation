@@ -1,5 +1,6 @@
-export default {
-  // todo enum?
-  ALERT: 'alert',
-  CONFIRM: 'confirm',
-};
+enum NotificationType {
+  ALERT = 'alert',
+  CONFIRM = 'confirm',
+}
+
+export default NotificationType;

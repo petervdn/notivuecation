@@ -1,3 +1,5 @@
+import NotificationType from 'lib/NotificationType';
+
 export interface IStore {
   state: any;
   subscribe: (callback: (mutation: IMutation, state: any) => void) => void;
@@ -28,4 +30,14 @@ export interface IStoreApi {
   getters?: any;
   actions?: any;
   local?: any;
+}
+
+export interface INotification {
+  type: NotificationType;
+  title: string;
+  confirm: string;
+  cancel: string;
+  message: string;
+  resolve: (result: boolean) => void;
+  isShowing: boolean;
 }
