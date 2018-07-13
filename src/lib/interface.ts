@@ -1,4 +1,4 @@
-import NotificationType from 'lib/NotificationType';
+import NotificationType from './NotificationType';
 
 export interface IStore {
   state: any;

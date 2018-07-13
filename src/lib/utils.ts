@@ -1,5 +1,4 @@
-import { INotification } from 'lib/interface';
-import { IStoreApi } from './interface';
+import { IStoreApi, INotification } from './interface';
 
 export function createDefaultStoreState(): INotification {
   return {
