@@ -25,7 +25,7 @@ Add the component to wherever you want it to render:
 <notivuecation></notivuecation>
 ```
 
-Open the notifactions from any Vue component:
+Open the notifications from any Vue component:
 ```javascript
 this.$confirm('Are you sure?').then(result => {
   // result is either true or false

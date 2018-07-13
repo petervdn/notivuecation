@@ -23,11 +23,10 @@ export default {
       state: createDefaultStoreState(),
       mutations: {
         [notificationStore.local.mutations.setNotificationData]: (state, payload) => {
-          if (payload) {
-            Object.keys(state).forEach(key => {
-              state[key] = payload[key];
-            });
-          }
+          const data = payload || createDefaultStoreState();
+          Object.keys(data).forEach(key => {
+            state[key] = data[key];
+          });
 
           state.isShowing = !!payload;
         },
@@ -62,6 +61,6 @@ export default {
     if (!Vue.prototype.$store) {
       Vue.prototype.$store = store;
     }
-    Vue.component('Notification', Notification);
+    Vue.component('notivuecation', Notification);
   },
 };

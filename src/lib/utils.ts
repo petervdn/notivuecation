@@ -3,7 +3,7 @@ import { IStoreApi } from './interface';
 export function createDefaultStoreState(): any {
   return {
     type: null,
-    title: 'test',
+    title: null,
     confirm: null,
     cancel: null,
     message: null,

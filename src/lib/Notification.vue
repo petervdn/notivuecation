@@ -44,7 +44,6 @@
         return this.cancel || 'Cancel';
       },
       ...mapState('notification', Object.keys(createDefaultStoreState())),
-
     },
   }
 </script>
