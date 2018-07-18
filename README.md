@@ -22,15 +22,14 @@ Vue.use(notivuecation, { store: myVuexStoreInstance });
 
 Add the component to wherever you want it to render:
 ```html
-<notivuecation></notivuecation>
+<notivuecation />
 ```
 
 Open the notifications from any Vue component:
 ```javascript
+this.$alert({ message: 'You are the 1 millionth visitor!'}).then(() => {});
+
 this.$confirm({ message: 'Are you sure?'}).then(result => {
   // result is true/false
 });
 ```
-
-## alert and confirm
-Two methods will be added to every Vue component: `$alert` and `$confirm` which both mimic their native counterparts.

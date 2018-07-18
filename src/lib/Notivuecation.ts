@@ -40,7 +40,7 @@ export default {
             });
           }).then(result => {
             context.commit(notificationStore.local.mutations.setNotificationData, null);
-            return Promise.resolve(result);
+            return Promise.resolve(payload.type === NotificationType.ALERT ? void 0 : result);
           });
         },
       },
