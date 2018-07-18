@@ -1,6 +1,6 @@
 import { IStore, IStoreApi } from './interface';
 import NotificationType from './NotificationType';
-import { createDefaultStoreState, initStoreApi } from './utils';
+import { createDefaultStoreState, initStoreApi, setDefaultLabels } from './utils';
 import Notification from './Notification.vue';
 
 const notificationStore: IStoreApi = {
@@ -46,17 +46,13 @@ export default {
       },
     });
 
-    Vue.prototype.$confirm = data =>
-      store.dispatch(notificationStore.actions.show, {
-        ...data,
-        type: NotificationType.CONFIRM,
-      });
+    const showActionForType = type => data => {
+      setDefaultLabels(data);
+      return store.dispatch(notificationStore.actions.show, { ...data, type });
+    };
 
-    Vue.prototype.$alert = data =>
-      store.dispatch(notificationStore.actions.show, {
-        ...data,
-        type: NotificationType.ALERT,
-      });
+    Vue.prototype.$confirm = showActionForType(NotificationType.CONFIRM);
+    Vue.prototype.$alert = showActionForType(NotificationType.ALERT);
 
     if (!Vue.prototype.$store) {
       Vue.prototype.$store = store;

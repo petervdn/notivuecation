@@ -5,12 +5,12 @@
       <p>{{ message }}</p>
 
       <template v-if="type === NotificationType.CONFIRM">
-        <button @click="confirmClick">{{ confirmLabel }}</button>
-        <button @click="cancelClick">{{ cancelLabel }}</button>
+        <button @click="confirmClick">{{ confirm }}</button>
+        <button @click="cancelClick">{{ cancel }}</button>
       </template>
 
       <template v-if="type === NotificationType.ALERT">
-        <button @click="confirmClick">{{ confirmLabel }}</button>
+        <button @click="confirmClick">{{ confirm }}</button>
       </template>
     </div>
 
@@ -37,12 +37,12 @@
       },
     },
     computed: {
-      confirmLabel() {
-        return this.confirm || 'Ok';
-      },
-      cancelLabel() {
-        return this.cancel || 'Cancel';
-      },
+      // confirmLabel() {
+      //   return this.confirm || 'Ok';
+      // },
+      // cancelLabel() {
+      //   return this.cancel || 'Cancel';
+      // },
       ...mapState('notification', Object.keys(createDefaultStoreState())),
     },
   }
