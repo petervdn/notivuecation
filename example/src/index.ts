@@ -9,7 +9,7 @@ const store = new Vuex.Store();
 
 Vue.use(notivuecation, { store });
 
-// Define a new component called button-counter
+// define custom component
 Vue.component('custom-component', {
   mixins: [componentMixin],
   template: '<div v-if="isShowing" style="width: 200px; background-color: grey"><h1>{{title}}<button @click="onConfirm">yes</button><button @click="onCancel">no</button></h1></div>',
@@ -24,7 +24,7 @@ new Vue({
       });
     },
     showAlert() {
-      this.$alert({ message: 'FYI...', 'confirm': 'Check'}).then(result => {
+      this.$alert({ message: 'FYI...' }).then(result => {
         console.log(result);
       });
     },

@@ -3,10 +3,11 @@ import { createDefaultStoreState } from './utils';
 import NotificationType from './NotificationType';
 
 export default {
-  data() {
-    return {
-      NotificationType,
-    };
+  computed: {
+    showCancel() {
+      return this.type === NotificationType.CONFIRM;
+    },
+    ...mapState('notification', Object.keys(createDefaultStoreState())),
   },
   methods: {
     onConfirm() {
@@ -15,8 +16,5 @@ export default {
     onCancel() {
       this.resolve(false);
     },
-  },
-  computed: {
-    ...mapState('notification', Object.keys(createDefaultStoreState())),
   },
 };

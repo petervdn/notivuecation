@@ -1,7 +1,6 @@
-import NotificationType from './NotificationType';
-import { IStoreApi, INotification } from './interface';
+import { IStoreApi, INotificationData } from './interface';
 
-export function createDefaultStoreState(): INotification {
+export function createDefaultStoreState(): INotificationData {
   // todo rename to INotificationData?
   return {
     type: null,

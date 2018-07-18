@@ -4,16 +4,9 @@
       <h2 class="example">{{ title }}</h2>
       <p>{{ message }}</p>
 
-      <template v-if="type === NotificationType.CONFIRM">
-        <button @click="onConfirm">{{ confirm }}</button>
-        <button @click="onCancel">{{ cancel }}</button>
-      </template>
-
-      <template v-if="type === NotificationType.ALERT">
-        <button @click="onConfirm">{{ confirm }}</button>
-      </template>
+      <button @click="onCancel" v-if="showCancel">{{ cancel }}</button>
+      <button @click="onConfirm">{{ confirm }}</button>
     </div>
-
   </div>
 </template>
 

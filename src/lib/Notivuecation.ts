@@ -1,5 +1,5 @@
 import { storeObject, notificationStore } from './store';
-import { IStore } from './interface';
+import { IStore, IINotificationLabels } from './interface';
 import NotificationType from './NotificationType';
 import Notification from './Notification.vue';
 
@@ -10,8 +10,8 @@ export default {
     store.registerModule('notification', storeObject);
 
     // create api methods
-    const showActionForType = type => data => {
-      const dataWithType = { ...data, type };
+    const showActionForType = type => (labelsData: IINotificationLabels) => {
+      const dataWithType = { ...labelsData, type };
 
       // set some default labels
       if (dataWithType.confirm === void 0) {

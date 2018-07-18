@@ -32,12 +32,15 @@ export interface IStoreApi {
   local?: any;
 }
 
-export interface INotification {
-  type: NotificationType;
-  title: string;
-  confirm: string;
-  cancel: string;
+export interface IINotificationLabels {
   message: string;
+  title?: string;
+  confirm?: string;
+  cancel?: string;
+}
+
+export interface INotificationData extends IINotificationLabels {
+  type: NotificationType;
   resolve: (result: boolean) => void;
   isShowing: boolean;
 }
