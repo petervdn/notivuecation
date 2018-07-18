@@ -1,7 +1,6 @@
 import { storeObject, notificationStore } from './store';
 import { IStore } from './interface';
 import NotificationType from './NotificationType';
-import { setDefaultLabels } from './utils';
 import Notification from './Notification.vue';
 
 export default {
@@ -12,8 +11,22 @@ export default {
 
     // create api methods
     const showActionForType = type => data => {
-      setDefaultLabels(data);
-      return store.dispatch(notificationStore.actions.show, { ...data, type });
+      const dataWithType = { ...data, type };
+
+      // set some default labels
+      if (dataWithType.confirm === void 0) {
+        dataWithType.confirm = 'Ok';
+      }
+      if (dataWithType.cancel === void 0) {
+        dataWithType.cancel = 'Cancel';
+      }
+      if (dataWithType.title === void 0 && dataWithType.type === NotificationType.ALERT) {
+        dataWithType.title = 'Alert';
+      } else if (dataWithType.title === void 0 && dataWithType.type === NotificationType.CONFIRM) {
+        dataWithType.title = 'Confirm';
+      }
+
+      return store.dispatch(notificationStore.actions.show, dataWithType);
     };
 
     Vue.prototype.$confirm = showActionForType(NotificationType.CONFIRM);

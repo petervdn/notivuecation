@@ -37,12 +37,6 @@
       },
     },
     computed: {
-      // confirmLabel() {
-      //   return this.confirm || 'Ok';
-      // },
-      // cancelLabel() {
-      //   return this.cancel || 'Cancel';
-      // },
       ...mapState('notification', Object.keys(createDefaultStoreState())),
     },
   }
