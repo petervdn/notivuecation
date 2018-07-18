@@ -5,12 +5,12 @@
       <p>{{ message }}</p>
 
       <template v-if="type === NotificationType.CONFIRM">
-        <button @click="confirmClick">{{ confirm }}</button>
-        <button @click="cancelClick">{{ cancel }}</button>
+        <button @click="onConfirm">{{ confirm }}</button>
+        <button @click="onCancel">{{ cancel }}</button>
       </template>
 
       <template v-if="type === NotificationType.ALERT">
-        <button @click="confirmClick">{{ confirm }}</button>
+        <button @click="onConfirm">{{ confirm }}</button>
       </template>
     </div>
 
@@ -18,27 +18,10 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
-  import NotificationType from './NotificationType';
-  import { createDefaultStoreState } from './utils';
+  import componentMixin from './componentMixin';
 
   export default {
-    data() {
-      return {
-        NotificationType,
-      };
-    },
-    methods: {
-      confirmClick() {
-        this.resolve(true);
-      },
-      cancelClick() {
-        this.resolve(false);
-      },
-    },
-    computed: {
-      ...mapState('notification', Object.keys(createDefaultStoreState())),
-    },
+    mixins: [componentMixin],
   }
 </script>
 
