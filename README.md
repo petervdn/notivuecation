@@ -90,3 +90,5 @@ Vue.component('my-custom-component', {
 }
 ```
 
+## limitations
+Multiple (or queued) notifications are not yet supported, so if a new one is triggered when there is already one in view, things may not work correctly (the new one is displayed, and the previous one will not be resolved).
