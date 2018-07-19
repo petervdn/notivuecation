@@ -12,7 +12,7 @@ npm install notivuecation
 ## usage
 
 
-Activate the plugin and supply a reference to your vuex store:
+1. Activate the plugin and supply a reference to your Vuex store:
 ```javascript
 import notivuecation from 'notivuecation';
 import Vue from 'vue';
@@ -20,12 +20,12 @@ import Vue from 'vue';
 Vue.use(notivuecation, { store: myVuexStoreInstance });
 ```
 
-Add the component to wherever you want it to render:
+2. Add a component for the notifications to render. A very simple component named 'notivuecation' is registered on plugin activation and should work out of the box:
 ```html
-<notivuecation /> // a component named 'notivuecation' is registered on plugin activation
+<notivuecation />
 ```
 
-Open an alert (ok button) or confirm (ok+cancel button) from any Vue component:
+3. Open an alert (ok button) or confirm (ok+cancel button) from any Vue component:
 ```javascript
 this.$alert({ message: 'You are the 1 millionth visitor!'}).then(claimPrize);
 });
@@ -48,22 +48,20 @@ interface IINotificationLabels {
 ```
 Not setting one of these value will result in a default string, except for the `message` field.
 
-## built-in component
-For quick prototyping, you can use the `<notivuecation />` component to render the notification.
-
 ## custom component
-To use your own component: just skip the render of the `<notivuecation />` component, and your own instead. You you should add the `componentMixin` to the component's mixins:
+To use your own component for displaying the notification, you can add the `componentMixin` to yor component's mixins:
+
 ```javascript
 import { componentMixin } from 'notivuecation';
 
 Vue.component('custom-component', {
   mixins: [componentMixin],
-  template: '<div v-if="isShowing">
+  template: `<div v-if="isShowing">
       <p>{{title}}</p>
       <button @click="onConfirm">yes</button>
       <button @click="onCancel" v-if="showCancel">no</button>
-    </div>',
+    </div>`,
 });
 ```
 
-Make sure to add the `isShowing` to the whole notification (so it can be shown at the correct time) and the `showCancel` to the cancel-button (so we can hide it for alerts);
+Make sure to use `isShowing` to show or hide the notification and `showCancel` for the cancel-button.

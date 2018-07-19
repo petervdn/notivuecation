@@ -12,7 +12,12 @@ Vue.use(notivuecation, { store });
 // define custom component
 Vue.component('custom-component', {
   mixins: [componentMixin],
-  template: '<div v-if="isShowing" style="width: 200px; background-color: grey"><h1>{{title}}<button @click="onConfirm">yes</button><button @click="onCancel">no</button></h1></div>',
+  template: `<div v-if="isShowing" style="width: 200px; background-color: grey">
+      <h1>{{title}}</h1>
+      <p>{{message}}</p>
+      <button @click="onConfirm">yes</button>\
+      <button @click="onCancel" v-if="showCancel">no</button>
+    </div>`,
 });
 
 new Vue({
