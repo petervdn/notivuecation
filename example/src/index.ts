@@ -15,8 +15,8 @@ Vue.component('custom-component', {
   template: `<div v-if="isShowing" style="width: 200px; background-color: grey">
       <h1>{{title}}</h1>
       <p>{{message}}</p>
-      <button @click="onConfirm">yes</button>\
-      <button @click="onCancel" v-if="showCancel">no</button>
+      <button @click="onConfirm">{{confirm}}</button>\
+      <button @click="onCancel" v-if="showCancel">{{cancel}}</button>
     </div>`,
 });
 

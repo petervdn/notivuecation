@@ -20,7 +20,7 @@ import Vue from 'vue';
 Vue.use(notivuecation, { store: myVuexStoreInstance });
 ```
 
-2. Add a component for the notifications to render. A very simple component named 'notivuecation' is registered on plugin activation and should work out of the box:
+2. Add a component for the notifications to render. A simple component called 'notivuecation' is registered on plugin activation and should work out of the box. You probably want to put this in the root component of your site, so it can always be visible.
 ```html
 <notivuecation />
 ```
@@ -41,15 +41,15 @@ Both `$alert` and `$confirm` accept an object containing some labels and texts t
 ```javascript
 interface IINotificationLabels {
   message: string;
-  title?: string;
-  confirm?: string; // used for the ok button in both alert and confirm
-  cancel?: string;
+  title?: string;   // default: either Confirm or Alert
+  confirm?: string; // default: Ok
+  cancel?: string;  // default: Cancel
 }
 ```
-Not setting one of these value will result in a default string, except for the `message` field.
+Note that the `message` field does not have a default value, and that the confirm button is used for both the alert and confirm state.
 
 ## custom component
-To use your own component for displaying the notification, you can add the `componentMixin` to yor component's mixins:
+To use your own component for displaying the notification, just add the `componentMixin` to your component's mixins:
 
 ```javascript
 import { componentMixin } from 'notivuecation';
@@ -57,9 +57,10 @@ import { componentMixin } from 'notivuecation';
 Vue.component('custom-component', {
   mixins: [componentMixin],
   template: `<div v-if="isShowing">
-      <p>{{title}}</p>
-      <button @click="onConfirm">yes</button>
-      <button @click="onCancel" v-if="showCancel">no</button>
+      <h2>{{title}}</h2>
+      <p>{{description}}</p>
+      <button @click="onConfirm">{{confirm}}</button>
+      <button @click="onCancel" v-if="showCancel">{{cancel}}</button>
     </div>`,
 });
 ```
