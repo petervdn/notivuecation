@@ -1,6 +1,6 @@
 {
   "name": "notivuecation",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Promise-based alert, confirm and other notifications for vue.",
   "main": "./index.js",
   "types": "./index.d.ts",
