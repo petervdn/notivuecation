@@ -35,7 +35,7 @@
     background-color: rgba(0, 0, 0, 0.8);
   }
   .overlay .notification {
-    border-radius: 2px;
+    border-radius: 3px;
     width: 400px;
     background-color: white;
     position: absolute;

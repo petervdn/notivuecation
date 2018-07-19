@@ -1,6 +1,8 @@
 # notivuecation
 
-Promise-based alerts, confirms and other notifications for Vue.js. This plugin requires Vuex (it will created a namespaced store on initialization) and a component to render the notifications. A very basic default component is supplied to get immediate results, but you can easily use of your own custom one.
+Promise-based alerts, confirms and other notifications for Vue.js. This plugin requires Vuex (it will created a namespaced store on initialization) and a component to render the notifications.
+
+A very basic default component can be used, but you can (and probably should) use of your own custom one.
 
 ## install
 
@@ -58,11 +60,33 @@ Vue.component('custom-component', {
   mixins: [componentMixin],
   template: `<div v-if="isShowing">
       <h2>{{title}}</h2>
-      <p>{{description}}</p>
+      <p>{{message}}</p>
       <button @click="onConfirm">{{confirm}}</button>
       <button @click="onCancel" v-if="showCancel">{{cancel}}</button>
     </div>`,
 });
 ```
+The mixin will:
+* add `onConfirm` and `onCancel` methods that will close the notification (note that these methods just call the resolve method with either `true` or `false`)
+* add `showCancel` computed property, which decides if the cancel button is visible (hidden for alerts)
+* map all poperties from the Vuex state to the component: `type`, `title`, `confirm`, `cancel`, `message`, `resolve` and `isShowing`.
 
 Make sure to use `isShowing` to show or hide the notification and `showCancel` for the cancel-button.
+
+## custom logic
+If your custom component needs to do specific logic (like validation or animations), the only thing you need to evenutally call is `resolve` with either `true` or `false` (depending on what the user clicked on).
+
+So for example you could override the default `onConfirm` method to start some animations before the notification closes:
+```javascript
+Vue.component('my-custom-component', {
+  mixins: [componentMixin],
+  methods: {
+    onConfirm() {
+      doAnimations().then(() => {
+        this.resolve(true);
+      });
+    },
+  }
+}
+```
+
