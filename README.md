@@ -58,8 +58,7 @@ import { componentMixin } from 'notivuecation';
 
 Vue.component('custom-component', {
   mixins: [componentMixin],
-  template: '
-    <div v-if="isShowing">
+  template: '<div v-if="isShowing">
       <p>{{title}}</p>
       <button @click="onConfirm">yes</button>
       <button @click="onCancel" v-if="showCancel">no</button>
