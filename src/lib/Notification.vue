@@ -1,11 +1,15 @@
 <template>
   <div class="overlay" v-if="isShowing">
     <div class="notification">
-      <h2 class="example">{{ title }}</h2>
-      <p>{{ message }}</p>
+      <h2>{{title}}</h2>
+      <div class="content">
+        <p>{{ message }}</p>
 
-      <button @click="onCancel" v-if="showCancel">{{ cancel }}</button>
-      <button @click="onConfirm">{{ confirm }}</button>
+        <div class="buttons">
+          <button @click="onConfirm">{{ confirm }}</button>
+          <button @click="onCancel" v-if="showCancel">{{ cancel }}</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,8 +22,11 @@
   }
 </script>
 
+
 <style>
   .overlay {
+    z-index: 9999;
+    font-family: sans-serif;
     position: fixed;
     left: 0;
     top: 0;
@@ -27,13 +34,29 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
   }
-  .notification {
+  .overlay .notification {
+    border-radius: 2px;
     width: 400px;
-    height: 300px;
     background-color: white;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .overlay .notification h2 {
+    margin: 0;
+    background-color: #666666;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: .9rem;
+  }
+
+  .overlay .notification .content {
+    padding: 0 15px 15px 15px;
+  }
+
+  .overlay .notification .buttons {
+    text-align: right;
   }
 </style>

@@ -24,12 +24,12 @@ new Vue({
   el: '#app',
   methods: {
     showConfirm() {
-      this.$confirm({message: 'Are you sure?'}).then(result => {
+      this.$confirm({message: 'Are you sure you want to do this?'}).then(result => {
         console.log(result);
       });
     },
     showAlert() {
-      this.$alert({ message: 'FYI...' }).then(result => {
+      this.$alert({ message: 'Please click ok to continue.' }).then(result => {
         console.log(result);
       });
     },
