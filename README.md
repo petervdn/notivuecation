@@ -14,7 +14,7 @@ npm install notivuecation
 ## usage
 
 
-1. Activate the plugin and supply a reference to your Vuex store:
+1 - Activate the plugin and supply a reference to your Vuex store:
 ```javascript
 import notivuecation from 'notivuecation';
 import Vue from 'vue';
@@ -22,12 +22,12 @@ import Vue from 'vue';
 Vue.use(notivuecation, { store: myVuexStoreInstance });
 ```
 
-2. Add the component that renders the notifications. You probably want to put this somewhere in the root component of your site, so it can always be visible.
+2 - Add the component that renders the notifications. You probably want to put this somewhere in the root component of your site, so it can always be visible.
 ```html
 <notivuecation />
 ```
 
-3. Call `$alert` or `$confirm` from any Vue component:
+3 - Call `$alert` or `$confirm` from any Vue component:
 ```javascript
 this.$alert({ message: 'You are the 1 millionth visitor!'}).then(claimPrize);
 });
