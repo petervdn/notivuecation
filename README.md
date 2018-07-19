@@ -16,7 +16,7 @@ npm install notivuecation
 
 1 - Activate the plugin and supply a reference to your Vuex store:
 ```javascript
-import notivuecation from 'notivuecation';
+import { notivuecation } from 'notivuecation';
 import Vue from 'vue';
 
 Vue.use(notivuecation, { store: myVuexStoreInstance });
