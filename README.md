@@ -1,6 +1,6 @@
 # notivuecation
 
-Promise-based alerts, confirms and other notifications for Vue.js. This plugin requires Vuex (it will created a namespaced store on initialization) and a component to render the notifications.
+Promise-based alerts, confirms and other notifications for Vue.js. This plugin requires Vuex and a component to render the notifications.
 
 A basic built-in component can be used, but you can easily switch to a custom implementation.
 
