@@ -11,8 +11,7 @@ npm install notivuecation
 ```
 
 
-## usage
-
+## basic usage
 
 1 - Activate the plugin and supply a reference to your Vuex store:
 ```javascript
@@ -34,6 +33,28 @@ this.$alert({ message: 'You are the 1 millionth visitor!'}).then(claimPrize);
 
 this.$confirm({ message: 'Are you sure?'}).then(result => {
   // result is true/false
+});
+```
+
+## in depth
+The plugin adds three methods to the Vue instance:
+* `$notify`
+* `$alert`
+* `$confirm`
+
+`$notify` is the base method that lets you customize everything you want, while `$alert` and `$confirm` are quick and easy wrappers that internally call `$notify` with some predefined data.
+
+## $notify
+The `$notify` method accepts an object that defines the notification, with a title, a message and all buttons to show:
+```javascript
+this.$notify({
+  title: 'Please choose!',
+  message: 'We really need to know which option you want.',
+  buttons: [
+    {label: 'option #1', value: 1},
+    {label: 'option #2', value: 2},
+    {label: 'option #3', value: 3},
+  ]
 });
 ```
 
