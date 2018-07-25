@@ -1,6 +1,6 @@
+import NotificationType from './NotificationType';
 import { storeObject, notificationStore } from './store';
 import { IStore, IINotificationLabels } from './interface';
-import NotificationType from './NotificationType';
 import Notification from './Notification.vue';
 
 export default {
@@ -10,27 +10,42 @@ export default {
     store.registerModule('notification', storeObject);
 
     // create api methods
-    const showActionForType = type => (labelsData: IINotificationLabels) => {
-      const dataWithType = { ...labelsData, type };
+    const createShowActionForType = type => (labelsData: IINotificationLabels) => {
+      const data: any = {
+        buttons: [],
+        message: labelsData.message,
+      };
 
-      // set some default labels
-      if (dataWithType.confirm === void 0) {
-        dataWithType.confirm = 'Ok';
-      }
-      if (dataWithType.cancel === void 0) {
-        dataWithType.cancel = 'Cancel';
-      }
-      if (dataWithType.title === void 0 && dataWithType.type === NotificationType.ALERT) {
-        dataWithType.title = 'Alert';
-      } else if (dataWithType.title === void 0 && dataWithType.type === NotificationType.CONFIRM) {
-        dataWithType.title = 'Confirm';
+      const confirmButton = {
+        label: labelsData.confirm || 'Ok',
+        value: true,
+        css: 'ok',
+      };
+
+      let defaultTitle;
+
+      if (type === NotificationType.ALERT) {
+        data.buttons = [confirmButton];
+        defaultTitle = 'Alert';
+      } else if (type === NotificationType.CONFIRM) {
+        const cancelButton = {
+          label: labelsData.cancel || 'Cancel',
+          value: false,
+          css: 'cancel',
+        };
+        data.buttons = [confirmButton, cancelButton];
+        defaultTitle = 'Confirm';
+      } else {
+        throw new Error(`Unknown type: ${type}`);
       }
 
-      return store.dispatch(notificationStore.actions.show, dataWithType);
+      data.title = labelsData.title !== void 0 ? labelsData.title : defaultTitle;
+
+      return store.dispatch(notificationStore.actions.show, data);
     };
 
-    Vue.prototype.$confirm = showActionForType(NotificationType.CONFIRM);
-    Vue.prototype.$alert = showActionForType(NotificationType.ALERT);
+    Vue.prototype.$confirm = createShowActionForType(NotificationType.CONFIRM);
+    Vue.prototype.$alert = createShowActionForType(NotificationType.ALERT);
 
     // when does this exist or not?
     if (!Vue.prototype.$store) {

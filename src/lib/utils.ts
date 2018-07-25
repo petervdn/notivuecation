@@ -1,12 +1,9 @@
-import { IStoreApi, INotificationData } from './interface';
+import { IStoreApi, INotificationData, IButton } from './interface';
 
 export function createDefaultStoreState(): INotificationData {
-  // todo rename to INotificationData?
   return {
-    type: null,
     title: null,
-    confirm: null,
-    cancel: null,
+    buttons: [],
     message: null,
     resolve: null,
     isShowing: false,

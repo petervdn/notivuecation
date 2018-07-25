@@ -1,5 +1,4 @@
 import { IStoreApi } from './interface';
-import NotificationType from './NotificationType';
 import { createDefaultStoreState, initStoreApi } from './utils';
 
 export const notificationStore: IStoreApi = {
@@ -35,7 +34,7 @@ export const storeObject = {
         });
       }).then(result => {
         context.commit(notificationStore.local.mutations.setNotificationData, null);
-        return Promise.resolve(payload.type === NotificationType.ALERT ? void 0 : result);
+        return Promise.resolve(result);
       });
     },
   },
