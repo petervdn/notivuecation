@@ -28,7 +28,7 @@ new Vue({
   el: '#app',
   methods: {
     test() {
-      this.$store.dispatch('notification/show', {
+      this.$notify({
         title: 'test title',
         message: 'Lorem ipsum dolor sit amet, cum scripta dolorem omittantur te, ex doming salutandi vis. Eam ea quas audire, consequat abhorreant incorrupte at duo.',
         buttons: [

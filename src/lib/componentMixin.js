@@ -3,6 +3,6 @@ import { createDefaultStoreState } from './utils';
 
 export default {
   computed: {
-    ...mapState('notification', Object.keys(createDefaultStoreState())),
+    ...mapState('notivuecation', Object.keys(createDefaultStoreState())),
   },
 };

@@ -1,15 +1,15 @@
 import NotificationType from './NotificationType';
-import { storeObject, notificationStore } from './store';
-import { IStore, IINotificationLabels } from './interface';
+import { storeObject, SHOW_NOTIFICATION } from './store';
+import { IStore, IINotificationLabels, IParams } from './interface';
 import Notification from './Notification.vue';
 
 export default {
-  install(Vue, params) {
+  install(Vue, params: IParams) {
     const store: IStore = params.store;
 
-    store.registerModule('notification', storeObject);
+    const storeName = 'notivuecation';
+    store.registerModule(storeName, storeObject);
 
-    // create api methods
     const createShowActionForType = type => (labelsData: IINotificationLabels) => {
       const data: any = {
         buttons: [],
@@ -41,11 +41,15 @@ export default {
 
       data.title = labelsData.title !== void 0 ? labelsData.title : defaultTitle;
 
-      return store.dispatch(notificationStore.actions.show, data);
+      return store.dispatch(`${storeName}/${SHOW_NOTIFICATION}`, data);
     };
 
+    // create the 3 api methods
     Vue.prototype.$confirm = createShowActionForType(NotificationType.CONFIRM);
     Vue.prototype.$alert = createShowActionForType(NotificationType.ALERT);
+    Vue.prototype.$notify = payload => {
+      return store.dispatch(`${storeName}/${SHOW_NOTIFICATION}`, payload);
+    };
 
     // when does this exist or not?
     if (!Vue.prototype.$store) {

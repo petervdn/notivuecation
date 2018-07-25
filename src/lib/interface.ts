@@ -1,3 +1,7 @@
+export interface IParams {
+  store: IStore;
+}
+
 export interface IStore {
   state: any;
   subscribe: (callback: (mutation: IMutation, state: any) => void) => void;
@@ -44,7 +48,6 @@ export interface IINotificationLabels {
 }
 
 export interface INotificationData {
-  // type: NotificationType;
   resolve: (result: boolean) => void;
   isShowing: boolean;
   message: string;
