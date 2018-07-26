@@ -36,28 +36,29 @@ this.$confirm({ message: 'Are you sure?'}).then(result => {
 });
 ```
 
-## in depth
+## overview
 The plugin adds three methods to the Vue instance:
 * `$notify`
 * `$alert`
 * `$confirm`
 
 ### $notify
-The `$notify` method accepts an object that defines the notification, with a title, a message and all buttons to show:
+The `$notify` method accepts an object that defines the title, a message and all buttons to show:
 ```javascript
 this.$notify({
   title: 'Please choose!',
   message: 'We really need to know which option you want.',
   buttons: [
-    {label: 'option #1', value: 1},
-    {label: 'option #2', value: 2},
-    {label: 'option #3', value: 3},
+    {label: 'option #1', value: 1, css: 'red'},
+    {label: 'option #2', value: 2, css: 'green'},
+    {label: 'option #3', value: 3, css: 'blue'},
   ]
 });
 ```
+The optional `css` property will be set as css class on the button, while the `value` will be used when resolving the promise (i.e. this is the value that will end up in the `then` when clicking the button).
 
 ### $confirm and $alert
-The `$confirm` and `$alert` methods are shorthand methods that internally call `$notify` with some predefined data. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
+The `$confirm` and `$alert` methods are shorthand methods that internally call `$notify` with some predefined data to cover most usecases. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
 
 ```javascript
 this.$confirm({
@@ -101,9 +102,9 @@ If your component needs to do specific logic (like validation or animations), th
 Vue.component('my-custom-component', {
   mixins: [componentMixin],
   methods: {
-    onConfirm() {
+    onButtonClick(button) {
       doAnimations().then(() => {
-        this.resolve(true);
+        this.resolve(button.value);
       });
     },
   }
