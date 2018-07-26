@@ -10,6 +10,10 @@ export default {
       cancel: 'Cancel',
       alertOk: 'Ok',
     };
+    const defaultCssClasses = {
+      confirm: 'confirm',
+      cancel: 'cancel',
+    };
 
     const store: IStore = params.store;
     const storeName = 'notivuecation';
@@ -32,7 +36,7 @@ export default {
       const confirmButton = {
         label: labels.confirmOkLabel,
         value: true,
-        css: 'ok',
+        css: defaultCssClasses.confirm,
       };
 
       let defaultTitle;
@@ -44,7 +48,7 @@ export default {
         const cancelButton = {
           label: labels.cancel,
           value: false,
-          css: 'cancel',
+          css: defaultCssClasses.cancel,
         };
         data.buttons = [confirmButton, cancelButton];
         defaultTitle = 'Confirm';

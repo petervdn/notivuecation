@@ -76,6 +76,7 @@ this.$confirm('Are you sure?');
 this.$confirm({message: 'Are you sure?'});
 ```
 
+When using `$confirm` or `$alert`, all confirm buttons will have the css-class `confirm` and all cancel buttons `cancel`.
 
 ## custom component
 If you want to use your own component for displaying the notification, just add the `componentMixin` to your component's mixins. It will map all poperties from the Vuex state to the component: `title`, `buttons`, `message`, `resolve` and `isShowing`.
