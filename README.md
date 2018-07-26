@@ -29,7 +29,6 @@ Vue.use(notivuecation, { store: myVuexStoreInstance });
 3 - Call `$alert` or `$confirm` from any Vue component:
 ```javascript
 this.$alert('You are the 1 millionth visitor!').then(claimPrize);
-});
 
 this.$confirm('Are you sure?').then(result => {
   // result is true/false
