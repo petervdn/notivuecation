@@ -28,10 +28,10 @@ Vue.use(notivuecation, { store: myVuexStoreInstance });
 
 3 - Call `$alert` or `$confirm` from any Vue component:
 ```javascript
-this.$alert({ message: 'You are the 1 millionth visitor!'}).then(claimPrize);
+this.$alert('You are the 1 millionth visitor!').then(claimPrize);
 });
 
-this.$confirm({ message: 'Are you sure?'}).then(result => {
+this.$confirm('Are you sure?').then(result => {
   // result is true/false
 });
 ```
@@ -58,20 +58,20 @@ this.$notify({
 The optional `css` property will be set as css class on the button, while the `value` will be used when resolving the promise (i.e. this is the value that will end up in the `then` when clicking the button).
 
 ### $confirm and $alert
-The `$confirm` and `$alert` methods are shorthand methods that internally call `$notify` with some predefined data to cover most usecases. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
+`$confirm` and `$alert` are shorthand methods that internally call `$notify` with some predefined data to cover most usecases. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
 
 ```javascript
 this.$confirm({
   message: 'Please confirm',
   title: 'Warning!', // default is 'Confirm' or 'Alert'
-  confirm: 'I will',      // default is 'Ok'
+  confirm: 'I will', // default is 'Ok'
   cancel: 'No way',  // default is 'Cancel', not used for $alert
 }).then(result => {
-  // result is true/false with $confirm, and not set for $alert
+  // result is true/false when using $confirm, and not set for $alert
 });
 ```
 
-Both methods can also be called with just a string as argument, which is the same as using an object with a `message` property. So these two are equal:
+Both methods can also be called with a string as argument, which is the same as using an object with only the `message` property set. So these two are equal:
 ```javascript
 this.$confirm('Are you sure?');
 this.$confirm({message: 'Are you sure?'});
@@ -103,7 +103,7 @@ Vue.component('custom-component', {
 __Make sure to use `isShowing` to show or hide the notification.__
 
 
-If your component needs to do specific logic (like validation or animations), the only thing you need to eventually do is call `this.resolve(someValue)`. You could for example override the default `onConfirm` method to start some animations before the notification closes:
+If your component needs to do specific logic (like validation or animations), the only thing you need to eventually do is call `this.resolve(someValue)`.
 ```javascript
 Vue.component('my-custom-component', {
   mixins: [componentMixin],
