@@ -63,12 +63,18 @@ The `$confirm` and `$alert` methods are shorthand methods that internally call `
 ```javascript
 this.$confirm({
   message: 'Please confirm',
-  title: 'Warning!', // optional, defaults to 'Confirm' or 'Alert'
-  ok: 'I will',     // defaults to 'Ok'
-  cancel: 'No way', // default is 'Cancel', not used for $alert
+  title: 'Warning!', // default is 'Confirm' or 'Alert'
+  ok: 'I will',      // default is 'Ok'
+  cancel: 'No way',  // default is 'Cancel', not used for $alert
 }).then(result => {
   // result is true/false with $confirm, and not set for $alert
 });
+```
+
+Both methods can also be called with just a string as argument, which is the same as using an object with a `message` property. So these two are equal:
+```javascript
+this.$confirm('Are you sure?');
+this.$confirm({message: 'Are you sure?'});
 ```
 
 

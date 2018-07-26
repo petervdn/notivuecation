@@ -46,7 +46,7 @@ new Vue({
       });
     },
     showAlert() {
-      this.$alert({ message: 'Please click ok to continue.' }).then(result => {
+      this.$alert('Please click ok to continue.').then(result => {
         console.log(result);
       });
     },

@@ -5,19 +5,32 @@ import Notification from './Notification.vue';
 
 export default {
   install(Vue, params: IParams) {
-    const store: IStore = params.store;
+    const defaultLabels = {
+      confirmOk: 'Ok',
+      cancel: 'Cancel',
+      alertOk: 'Ok',
+    };
 
+    const store: IStore = params.store;
     const storeName = 'notivuecation';
     store.registerModule(storeName, storeObject);
 
-    const createShowActionForType = type => (labelsData: IINotificationLabels) => {
+    const createShowActionForType = type => (param: IINotificationLabels | string) => {
+      const labels = {
+        confirmOkLabel:
+          typeof param !== 'string' && param.confirm ? param.confirm : defaultLabels.confirmOk,
+        alertOkLabel:
+          typeof param !== 'string' && param.confirm ? param.confirm : defaultLabels.alertOk,
+        cancel: typeof param !== 'string' && param.cancel ? param.cancel : defaultLabels.cancel,
+      };
+
       const data: any = {
         buttons: [],
-        message: labelsData.message,
+        message: typeof param === 'string' ? param : param.message,
       };
 
       const confirmButton = {
-        label: labelsData.confirm || 'Ok',
+        label: labels.confirmOkLabel,
         value: true,
         css: 'ok',
       };
@@ -29,7 +42,7 @@ export default {
         defaultTitle = 'Alert';
       } else if (type === NotificationType.CONFIRM) {
         const cancelButton = {
-          label: labelsData.cancel || 'Cancel',
+          label: labels.cancel,
           value: false,
           css: 'cancel',
         };
@@ -39,7 +52,7 @@ export default {
         throw new Error(`Unknown type: ${type}`);
       }
 
-      data.title = labelsData.title !== void 0 ? labelsData.title : defaultTitle;
+      data.title = typeof param !== 'string' && param.title !== void 0 ? param.title : defaultTitle;
 
       return store.dispatch(`${storeName}/${SHOW_NOTIFICATION}`, data);
     };
