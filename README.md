@@ -64,7 +64,7 @@ The `$confirm` and `$alert` methods are shorthand methods that internally call `
 this.$confirm({
   message: 'Please confirm',
   title: 'Warning!', // default is 'Confirm' or 'Alert'
-  ok: 'I will',      // default is 'Ok'
+  confirm: 'I will',      // default is 'Ok'
   cancel: 'No way',  // default is 'Cancel', not used for $alert
 }).then(result => {
   // result is true/false with $confirm, and not set for $alert

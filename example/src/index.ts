@@ -41,7 +41,7 @@ new Vue({
       })
     },
     showConfirm() {
-      this.$confirm({message: 'Are you sure you want to do this?', ok: 'Yes'}).then(result => {
+      this.$confirm({message: 'Are you sure you want to do this?', confirm: 'Yes', cancel: 'No way'}).then(result => {
         console.log(result);
       });
     },
