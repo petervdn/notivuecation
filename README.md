@@ -46,7 +46,7 @@ The `$notify` method accepts an object that defines the title, a message and all
 ```javascript
 this.$notify({
   title: 'Claim prize',
-  message: 'What color car do you want?',
+  message: 'What color should your car be?',
   buttons: [
     {label: 'red', value: 1, css: 'red'},
     {label: 'green', value: 2, css: 'green'},
@@ -61,9 +61,9 @@ The optional `css` property on the buttons will be set as css class on the butto
 
 ```javascript
 this.$confirm({
-  message: 'Please confirm',
-  title: 'Warning!', // default is 'Confirm' or 'Alert'
-  confirm: 'I will', // default is 'Ok'
+  title: 'Warning!', // default is either 'Confirm' or 'Alert'
+  message: 'Please confirm that you have read this.',
+  confirm: 'Sure man', // default is 'Ok'
   cancel: 'No way',  // default is 'Cancel', not used for $alert
 }).then(result => {
   // result is true/false when using $confirm, and not set for $alert
