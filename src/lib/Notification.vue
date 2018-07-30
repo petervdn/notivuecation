@@ -1,17 +1,15 @@
 <template>
-  <div class="overlay" v-if="isShowing">
-    <div class="notification">
+  <div class="notivuecation-overlay" v-if="isShowing">
+    <div class="notivuecation-content">
       <h3>{{title}}</h3>
-      <div class="content">
-        <p>{{ message }}</p>
+      <p>{{ message }}</p>
 
-        <div class="buttons">
-          <button
-            v-for="button in buttons"
-            :class="button.css"
-            @click="resolve(button.value)"
-          >{{button.label}}</button>
-        </div>
+      <div class="notivuecation-buttons">
+        <button
+          v-for="button in buttons"
+          :class="button.css"
+          @click="resolve(button.value)"
+        >{{button.label}}</button>
       </div>
     </div>
   </div>
@@ -27,7 +25,7 @@
 
 
 <style>
-  .overlay {
+  .notivuecation-overlay {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -40,18 +38,19 @@
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 9999;
   }
-  .overlay .notification {
+
+  .notivuecation-content {
     max-width: 400px;
     background-color: white;
     padding: 20px;
     border-radius: 3px;
   }
 
-  .overlay h3 {
+  .notivuecation-content h3 {
     margin: 0;
   }
 
-  .overlay .buttons {
+  .notivuecation-buttons {
     text-align: right;
   }
 </style>
