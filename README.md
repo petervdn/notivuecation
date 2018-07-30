@@ -78,6 +78,34 @@ this.$confirm({message: 'Are you sure?'});
 
 When using `$confirm` or `$alert`, all confirm buttons will have the css-class `confirm` and all cancel buttons `cancel`.
 
+## styling
+The default component has some basic styling to overlay the content and show the message.
+For your own project you might want to use custom styling for the notification itself.
+There are some basic styles and simple classes which you can override easily.
+A small example when using CSS Modules (with SCSS) in your Vue project.
+
+```html
+<Notivuecation :class="$style.notification" />
+```
+
+```scss
+:local {
+  .notification {
+    background: rgba(#000, 0.3);
+
+    :global {
+      .notivuecation-content {
+        background: #000;
+        color: #fff;
+      }
+    }
+  }
+}
+```
+
+Which would make the notification mask lighter, the content background black and the content contrasting white.
+
+
 ## custom component
 If you want to use your own component for displaying the notification, just add the `componentMixin` to your component's mixins. It will map all poperties from the Vuex state to the component: `title`, `buttons`, `message`, `resolve` and `isShowing`.
 
@@ -98,35 +126,6 @@ Vue.component('custom-component', {
     </div>`,
 });
 ```
-
-
-## Style overrides
-The Notivuecation has some basic styling to overlay the content and show the message.
-For your own project you might want to use custom styling for the notification itself.
-There are some basic styles and simple classes which you can override easily.
-A small example when using CSS Modules (with SCSS) in your Vue project.
-
-```html
-<Notivuecation :class="$style.notification" />
-```
-
-```scss
-:local {
-  .notification {
-    background: rgba(#000, 0.3);
-    
-    :global {
-      .notivuecation-content {
-        background: #000;
-        color: #fff;
-      }
-    }
-  }
-}
-```
-
-Which would make the notification mask lighter, the content background black and the content contrasting white.
-
 
 __Make sure to use `isShowing` to show or hide the notification.__
 
