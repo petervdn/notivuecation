@@ -3,12 +3,58 @@
   <head>
     <meta charset="UTF-8">
     <title>example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      code {
+        padding: 10px;
+        display: block;
+        margin-bottom: 5px;
+
+      }
+      pre {
+        color: white;
+        background-color: #2b91af;
+      }
+
+    </style>
   </head>
-  <body style="padding: 20px">
+  <body style="padding: 0 20px 20px 20px">
     <div id="app">
-      <button @click="showConfirm">confirm</button>
-      <button @click="showAlert">alert</button>
-      <button @click="test">test</button>
+      <h1>notivuecation</h1>
+      <p>Promise-based alert/confirm modal for Vue.js</p>
+
+      <h3>basic alert/confirm</h3>
+      <pre><code>this.$confirm('Are you sure you want to do this?');
+this.$alert('Please click ok');</code></pre>
+      <button @click="showBasicConfirm">confirm</button>
+      <button @click="showBasicAlert">alert</button>
+
+      <h3>custom alert/confirm</h3>
+      <pre><code>this.$confirm({
+  message: 'Are you sure you want to do this?',
+  confirm: 'Yes!',
+  cancel: 'Hell no',
+});
+
+this.$alert({
+  title: 'Important!',
+  message: 'Please confirm',
+  confirm: 'Sure!',
+});</code></pre>
+      <button @click="showCustomConfirm">confirm</button>
+      <button @click="showCustomAlert">alert</button>
+
+      <h3>fully custom</h3>
+      <pre><code>this.$notify({
+  title: 'Custom title',
+  message: 'Custom message',
+  buttons: [
+    {label: 'option #1', value: 1},
+    {label: 'option #2', value: 2},
+    {label: 'option #3', value: 3},
+  ]
+})</code></pre>
+      <button @click="showFullCustom">custom</button>
 
       <custom-component></custom-component>
       <notivuecation></notivuecation>

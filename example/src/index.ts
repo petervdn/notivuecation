@@ -27,26 +27,38 @@ Vue.component('custom-component', {
 new Vue({
   el: '#app',
   methods: {
-    test() {
+    showFullCustom() {
       this.$notify({
-        title: 'test title',
-        message: 'Lorem ipsum dolor sit amet, cum scripta dolorem omittantur te, ex doming salutandi vis. Eam ea quas audire, consequat abhorreant incorrupte at duo.',
+        title: 'Custom title',
+        message: 'Custom message.',
         buttons: [
           {label: 'option #1', value: 1},
           {label: 'option #2', value: 2},
           {label: 'option #3', value: 3},
         ]
       }).then(result => {
-        console.log('result', result);
+        console.log(result);
       })
     },
-    showConfirm() {
-      this.$confirm({message: 'Are you sure you want to do this?', confirm: 'Yes', cancel: 'No way'}).then(result => {
+    showBasicConfirm() {
+      this.$confirm('Are you sure you want to do this?').then(result => {
         console.log(result);
       });
     },
-    showAlert() {
-      this.$alert('Please click ok to continue.').then(result => {
+    showCustomConfirm() {
+      this.$confirm({ message: 'Are you sure you want to do this?', confirm: 'Yes!', cancel: 'Hell no' }).then(result => {
+        console.log(result);
+      });
+    },
+    showCustomAlert() {
+      this.$alert({
+        title: 'Important!',
+        message: 'Please confirm',
+        confirm: 'Sure!',
+      });
+    },
+    showBasicAlert() {
+      this.$alert('Please click ok').then(result => {
         console.log(result);
       });
     },
