@@ -10,6 +10,8 @@ A basic built-in component can be used, but you can easily switch to a custom im
 npm install notivuecation
 ```
 
+## demo
+See some examples on the [demo page](https://petervdn.github.io/notivuecation/example/).
 
 ## basic usage
 
