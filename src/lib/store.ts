@@ -1,23 +1,13 @@
-import { IStoreApi } from './interface';
-import NotificationType from './NotificationType';
-import { createDefaultStoreState, initStoreApi } from './utils';
+import { createDefaultStoreState } from './utils';
 
-export const notificationStore: IStoreApi = {
-  mutations: {
-    setNotificationData: null,
-  },
-  actions: {
-    show: null,
-  },
-};
-
-initStoreApi(notificationStore, 'notification');
+const SET_NOTIFICATION_DATA = 'setNotificationData';
+export const SHOW_NOTIFICATION = 'showNotification';
 
 export const storeObject = {
   namespaced: true,
   state: createDefaultStoreState(),
   mutations: {
-    [notificationStore.local.mutations.setNotificationData]: (state, payload) => {
+    [SET_NOTIFICATION_DATA]: (state, payload) => {
       const data = payload || createDefaultStoreState();
       Object.keys(data).forEach(key => {
         state[key] = data[key];
@@ -27,15 +17,15 @@ export const storeObject = {
     },
   },
   actions: {
-    [notificationStore.local.actions.show]: (context, payload) => {
+    [SHOW_NOTIFICATION]: (context, payload) => {
       return new Promise(resolve => {
-        context.commit(notificationStore.local.mutations.setNotificationData, {
+        context.commit(SET_NOTIFICATION_DATA, {
           ...payload,
           resolve,
         });
       }).then(result => {
-        context.commit(notificationStore.local.mutations.setNotificationData, null);
-        return Promise.resolve(payload.type === NotificationType.ALERT ? void 0 : result);
+        context.commit(SET_NOTIFICATION_DATA, null);
+        return Promise.resolve(result);
       });
     },
   },

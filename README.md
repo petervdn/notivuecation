@@ -1,6 +1,6 @@
 # notivuecation
 
-Promise-based alerts, confirms and other notifications for Vue.js. This plugin requires Vuex and a component to render the notifications.
+Promise-based alert and confirm modal for Vue.js. This plugin requires Vuex and a component to render the notifications.
 
 A basic built-in component can be used, but you can easily switch to a custom implementation.
 
@@ -11,8 +11,7 @@ npm install notivuecation
 ```
 
 
-## usage
-
+## basic usage
 
 1 - Activate the plugin and supply a reference to your Vuex store:
 ```javascript
@@ -29,29 +28,58 @@ Vue.use(notivuecation, { store: myVuexStoreInstance });
 
 3 - Call `$alert` or `$confirm` from any Vue component:
 ```javascript
-this.$alert({ message: 'You are the 1 millionth visitor!'}).then(claimPrize);
-});
+this.$alert('You are the 1 millionth visitor!').then(claimPrize);
 
-this.$confirm({ message: 'Are you sure?'}).then(result => {
+this.$confirm('Are you sure?').then(result => {
   // result is true/false
 });
 ```
 
-## message and button labels
-Both `$alert` and `$confirm` accept an object containing labels and texts to use:
+## overview
+The plugin adds three methods to the Vue instance:
+* `$notify`
+* `$alert`
+* `$confirm`
+
+### $notify
+The `$notify` method accepts an object that defines the title, a message and all buttons to show:
+```javascript
+this.$notify({
+  title: 'Claim prize',
+  message: 'What color should your car be?',
+  buttons: [
+    {label: 'red', value: 1, css: 'red'},
+    {label: 'green', value: 2, css: 'green'},
+    {label: 'blue', value: 3, css: 'blue'},
+  ]
+});
+```
+The optional `css` property on the buttons will be set as css class on the button, while the `value` will be used when resolving the promise (i.e. this is the value that will end up in the `then` when clicking the button).
+
+### $confirm and $alert
+`$confirm` and `$alert` are shorthand methods that internally call `$notify` with some predefined data to cover most usecases. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
 
 ```javascript
-interface IINotificationLabels {
-  message: string;
-  title?: string;   // default: either Confirm or Alert
-  confirm?: string; // default: Ok
-  cancel?: string;  // default: Cancel
-}
+this.$confirm({
+  title: 'Warning!', // default is either 'Confirm' or 'Alert'
+  message: 'Please confirm that you have read this.',
+  confirm: 'Sure man', // default is 'Ok'
+  cancel: 'No way',  // default is 'Cancel', not used for $alert
+}).then(result => {
+  // result is true/false when using $confirm, and not set for $alert
+});
 ```
-Note that the `message` field does not have a default value, and that the confirm button is used for both the alert and confirm state.
+
+Both methods can also be called with a string as argument, which is the same as using an object with only the `message` property set. So these two are equal:
+```javascript
+this.$confirm('Are you sure?');
+this.$confirm({message: 'Are you sure?'});
+```
+
+When using `$confirm` or `$alert`, all confirm buttons will have the css-class `confirm` and all cancel buttons `cancel`.
 
 ## custom component
-To use your own component for displaying the notification, just add the `componentMixin` to your component's mixins:
+If you want to use your own component for displaying the notification, just add the `componentMixin` to your component's mixins. It will map all poperties from the Vuex state to the component: `title`, `buttons`, `message`, `resolve` and `isShowing`.
 
 ```javascript
 import { componentMixin } from 'notivuecation';
@@ -59,31 +87,30 @@ import { componentMixin } from 'notivuecation';
 Vue.component('custom-component', {
   mixins: [componentMixin],
   template: `<div v-if="isShowing">
-      <h2>{{title}}</h2>
+      <h1>{{title}}</h1>
       <p>{{message}}</p>
-      <button @click="onConfirm">{{confirm}}</button>
-      <button @click="onCancel" v-if="showCancel">{{cancel}}</button>
+
+      <button
+        v-for="button in buttons"
+        :class="button.css"
+        @click="resolve(button.value)"
+      >{{button.label}}</button>
     </div>`,
 });
 ```
-The mixin will:
-* add `onConfirm` and `onCancel` methods that will close the notification (note that these methods just call the resolve method with either `true` or `false`)
-* add `showCancel` computed property, which decides if the cancel button is visible (hidden for alerts)
-* map all poperties from the Vuex state to the component: `type`, `title`, `confirm`, `cancel`, `message`, `resolve` and `isShowing`.
 
-__Make sure to use `isShowing` to show or hide the notification and `showCancel` for the cancel-button.__
 
-## custom logic
-If your component needs to do specific logic (like validation or animations), the only thing you need to eventually call is `this.resolve()` with either `true` or `false` (depending on what the user clicked on).
+__Make sure to use `isShowing` to show or hide the notification.__
 
-You could for example override the default `onConfirm` method to start some animations before the notification closes:
+
+If your component needs to do specific logic (like validation or animations), the only thing you need to eventually do is call `this.resolve(someValue)`.
 ```javascript
 Vue.component('my-custom-component', {
   mixins: [componentMixin],
   methods: {
-    onConfirm() {
+    onButtonClick(button) {
       doAnimations().then(() => {
-        this.resolve(true);
+        this.resolve(button.value);
       });
     },
   }

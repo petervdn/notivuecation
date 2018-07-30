@@ -1,4 +1,6 @@
-import NotificationType from './NotificationType';
+export interface IParams {
+  store: IStore;
+}
 
 export interface IStore {
   state: any;
@@ -32,6 +34,12 @@ export interface IStoreApi {
   local?: any;
 }
 
+export interface IButton {
+  label: string;
+  css: string;
+  value?: any;
+}
+
 export interface IINotificationLabels {
   message: string;
   title?: string;
@@ -39,8 +47,10 @@ export interface IINotificationLabels {
   cancel?: string;
 }
 
-export interface INotificationData extends IINotificationLabels {
-  type: NotificationType;
+export interface INotificationData {
   resolve: (result: boolean) => void;
   isShowing: boolean;
+  message: string;
+  title: string;
+  buttons: IButton[];
 }

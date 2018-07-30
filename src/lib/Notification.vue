@@ -6,8 +6,11 @@
         <p>{{ message }}</p>
 
         <div class="buttons">
-          <button @click="onConfirm">{{ confirm }}</button>
-          <button @click="onCancel" v-if="showCancel">{{ cancel }}</button>
+          <button
+            v-for="button in buttons"
+            :class="button.css"
+            @click="resolve(button.value)"
+          >{{button.label}}</button>
         </div>
       </div>
     </div>
