@@ -85,7 +85,7 @@ There are some basic styles and simple classes which you can override easily.
 A small example when using CSS Modules (with SCSS) in your Vue project.
 
 ```html
-<Notivuecation :class="$style.notification" />
+<notivuecation :class="$style.notification" />
 ```
 
 ```scss
