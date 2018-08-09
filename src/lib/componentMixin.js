@@ -23,6 +23,18 @@ export default {
     eventBus.$on(events.HIDE_NOTIFICATION, this.onHideNotification);
   },
   computed: {
+    resolve() {
+      return this.notification ? this.notification.resolve : null;
+    },
+    buttons() {
+      return this.notification ? this.notification.buttons : null;
+    },
+    title() {
+      return this.notification ? this.notification.title : null;
+    },
+    message() {
+      return this.notification ? this.notification.message : null;
+    },
     notification() {
       return this.notifications[0];
     },
