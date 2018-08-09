@@ -26,9 +26,6 @@ module.exports = {
       },
     ],
   },
-  externals: {
-    vuex: 'vuex'
-  },
   output: {
     path: __dirname,
     filename: 'index.js',
