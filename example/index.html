@@ -21,15 +21,24 @@
   <body style="padding: 0 20px 20px 20px">
     <div id="app">
       <h1>notivuecation</h1>
-      <p>Promise-based alert/confirm modal for Vue.js</p>
+      <p>Promise-based alert/confirm modal for Vue.js. Results are be logged to the console. Note that the styling and looks are completely up to you.</p>
+
+      <h3>init</h3><pre><code>import { notivuecation } from 'notivuecation';
+
+Vue.use(Vuex);
+const store = new Vuex.Store();
+
+Vue.use(notivuecation, { store });</code></pre>
 
       <h3>basic alert/confirm</h3>
+      <p>Using predefined button labels, you can quickly open a confirm or alert popup by just supplying the message.</p>
       <pre><code>this.$confirm('Are you sure you want to do this?');
 this.$alert('Please click ok');</code></pre>
       <button @click="showBasicConfirm">confirm</button>
       <button @click="showBasicAlert">alert</button>
 
       <h3>custom alert/confirm</h3>
+      <p>Send an object instead of a string to define title, message and button labels.</p>
       <pre><code>this.$confirm({
   message: 'Are you sure you want to do this?',
   confirm: 'Yes!',
@@ -45,6 +54,7 @@ this.$alert({
       <button @click="showCustomAlert">alert</button>
 
       <h3>fully custom</h3>
+      <p>If you want fully custom buttons, you can call $notify directly and specify all buttons.</p>
       <pre><code>this.$notify({
   title: 'Custom title',
   message: 'Custom message',
@@ -56,7 +66,6 @@ this.$alert({
 })</code></pre>
       <button @click="showFullCustom">custom</button>
 
-      <custom-component></custom-component>
       <notivuecation></notivuecation>
     </div>
   </body>

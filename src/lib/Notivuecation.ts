@@ -1,77 +1,29 @@
 import NotificationType from './NotificationType';
-import { storeObject, SHOW_NOTIFICATION } from './store';
-import { IStore, IINotificationLabels, IParams } from './interface';
+import events from './events';
 import Notification from './Notification.vue';
+import { createShowActionForType } from './utils';
+
+export let eventBus: any;
 
 export default {
-  install(Vue, params: IParams) {
-    const defaultLabels = {
-      confirmOk: 'Ok',
-      cancel: 'Cancel',
-      alertOk: 'Ok',
-    };
-    const defaultCssClasses = {
-      confirm: 'confirm',
-      cancel: 'cancel',
-    };
+  install(Vue) {
+    // create the event bus
+    eventBus = new Vue();
 
-    const store: IStore = params.store;
-    const storeName = 'notivuecation';
-    store.registerModule(storeName, storeObject);
-
-    const createShowActionForType = type => (param: IINotificationLabels | string) => {
-      const labels = {
-        confirmOkLabel:
-          typeof param !== 'string' && param.confirm ? param.confirm : defaultLabels.confirmOk,
-        alertOkLabel:
-          typeof param !== 'string' && param.confirm ? param.confirm : defaultLabels.alertOk,
-        cancel: typeof param !== 'string' && param.cancel ? param.cancel : defaultLabels.cancel,
-      };
-
-      const data: any = {
-        buttons: [],
-        message: typeof param === 'string' ? param : param.message,
-      };
-
-      const confirmButton = {
-        label: labels.confirmOkLabel,
-        value: true,
-        css: defaultCssClasses.confirm,
-      };
-
-      let defaultTitle;
-
-      if (type === NotificationType.ALERT) {
-        data.buttons = [confirmButton];
-        defaultTitle = 'Alert';
-      } else if (type === NotificationType.CONFIRM) {
-        const cancelButton = {
-          label: labels.cancel,
-          value: false,
-          css: defaultCssClasses.cancel,
-        };
-        data.buttons = [confirmButton, cancelButton];
-        defaultTitle = 'Confirm';
-      } else {
-        throw new Error(`Unknown type: ${type}`);
-      }
-
-      data.title = typeof param !== 'string' && param.title !== void 0 ? param.title : defaultTitle;
-
-      return store.dispatch(`${storeName}/${SHOW_NOTIFICATION}`, data);
-    };
+    // create the base method to emit notification-data to the component
+    const notifyMethod = payload =>
+      new Promise(resolve => {
+        payload.resolve = resolve;
+        eventBus.$emit(events.SHOW_NOTIFICATION, payload);
+      }).then(result => {
+        eventBus.$emit(events.HIDE_NOTIFICATION, payload);
+        return result;
+      });
 
     // create the 3 api methods
-    Vue.prototype.$confirm = createShowActionForType(NotificationType.CONFIRM);
-    Vue.prototype.$alert = createShowActionForType(NotificationType.ALERT);
-    Vue.prototype.$notify = payload => {
-      return store.dispatch(`${storeName}/${SHOW_NOTIFICATION}`, payload);
-    };
-
-    // when does this exist or not?
-    if (!Vue.prototype.$store) {
-      Vue.prototype.$store = store;
-    }
+    Vue.prototype.$confirm = createShowActionForType(NotificationType.CONFIRM, notifyMethod);
+    Vue.prototype.$alert = createShowActionForType(NotificationType.ALERT, notifyMethod);
+    Vue.prototype.$notify = notifyMethod;
 
     Vue.component('notivuecation', Notification);
   },

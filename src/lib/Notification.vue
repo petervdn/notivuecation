@@ -1,14 +1,14 @@
 <template>
-  <div class="notivuecation-overlay" v-if="isShowing">
+  <div class="notivuecation-overlay" v-if="notification">
     <div class="notivuecation-content">
-      <h3>{{title}}</h3>
-      <p>{{ message }}</p>
+      <h3>{{notification.title}}</h3>
+      <p>{{ notification.message }}</p>
 
       <div class="notivuecation-buttons">
         <button
-          v-for="button in buttons"
+          v-for="button in notification.buttons"
           :class="button.css"
-          @click="resolve(button.value)"
+          @click="notification.resolve(button.value)"
         >{{button.label}}</button>
       </div>
     </div>
