@@ -25,10 +25,7 @@
 
       <h3>init</h3><pre><code>import { notivuecation } from 'notivuecation';
 
-Vue.use(Vuex);
-const store = new Vuex.Store();
-
-Vue.use(notivuecation, { store });</code></pre>
+Vue.use(notivuecation);</code></pre>
 
       <h3>basic alert/confirm</h3>
       <p>Using predefined button labels, you can quickly open a confirm or alert popup by just supplying the message.</p>
@@ -70,7 +67,6 @@ this.$alert({
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuex"></script>
   <script src="./main.js"></script>
 </html>
 

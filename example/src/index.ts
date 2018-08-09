@@ -1,18 +1,12 @@
 import { notivuecation, componentMixin } from '../../src';
 
-
 declare const Vue;
-declare const Vuex;
-
-Vue.use(Vuex);
-const store = new Vuex.Store();
-
-Vue.use(notivuecation, { store });
+Vue.use(notivuecation);
 
 // define custom component
 Vue.component('custom-component', {
   mixins: [componentMixin],
-  template: `<div v-if="isShowing" style="width: 200px; background-color: grey">
+  template: `<div v-if="notification" style="width: 200px; background-color: grey">
       <h1>{{title}}</h1>
       <p>{{message}}</p>
       

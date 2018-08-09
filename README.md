@@ -1,8 +1,6 @@
 # notivuecation
 
-Promise-based alert and confirm modal for Vue.js. This plugin requires Vuex and a component to render the notifications.
-
-A basic built-in component can be used, but you can easily switch to a custom implementation.
+Promise-based alert and confirm modal for Vue.js. 
 
 ## install
 
@@ -15,15 +13,15 @@ See some examples on the [demo page](https://petervdn.github.io/notivuecation/ex
 
 ## basic usage
 
-1 - Activate the plugin and supply a reference to your Vuex store:
+1 - Activate the plugin.
 ```javascript
 import { notivuecation } from 'notivuecation';
 import Vue from 'vue';
 
-Vue.use(notivuecation, { store: myVuexStoreInstance });
+Vue.use(notivuecation);
 ```
 
-2 - Add the component that renders the notifications. You probably want to put this somewhere in the root component of your site, so it can always be visible.
+2 - Add the component that renders the notifications. You probably want to put this somewhere in the root component of your site, so it can always be visible. There is a simple component (named `notivuecation`) available, but you can also create and use your own.
 ```html
 <notivuecation />
 ```
@@ -109,14 +107,14 @@ Which would make the notification mask lighter, the content background black and
 
 
 ## custom component
-If you want to use your own component for displaying the notification, just add the `componentMixin` to your component's mixins. It will map all poperties from the Vuex state to the component: `title`, `buttons`, `message`, `resolve` and `isShowing`.
+If you want to use your own component for displaying the notification, just add the `componentMixin` to your component's mixins. It will add the following properties to the component: `title`, `buttons`, `message`, `resolve` and `notification`.
 
 ```javascript
 import { componentMixin } from 'notivuecation';
 
 Vue.component('custom-component', {
   mixins: [componentMixin],
-  template: `<div v-if="isShowing">
+  template: `<div v-if="notification">
       <h1>{{title}}</h1>
       <p>{{message}}</p>
 
@@ -129,7 +127,7 @@ Vue.component('custom-component', {
 });
 ```
 
-__Make sure to use `isShowing` to show or hide the notification.__
+__Make sure to use `v-if="notification"` (or `v-show`) to show or hide the notification.__
 
 
 If your component needs to do specific logic (like validation or animations), the only thing you need to eventually do is call `this.resolve(someValue)`.
