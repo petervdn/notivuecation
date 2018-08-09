@@ -16,6 +16,18 @@
         background-color: #2b91af;
       }
 
+      .notivuecation-overlay {
+        position: fixed;
+        width: 100%;
+        heigth: 100%;
+        background-color: rgba(0,0,0,0.5);
+        top: 0;
+        left: 0;
+      }
+      .notivuecation-content {
+        background-color: white;
+        width: 300px;
+      }
     </style>
   </head>
   <body style="padding: 0 20px 20px 20px">
@@ -63,10 +75,11 @@ this.$alert({
 })</code></pre>
       <button @click="showFullCustom">custom</button>
 
-      <notivuecation></notivuecation>
+      <custom-component></custom-component>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
   <script src="./main.js"></script>
 </html>
 

@@ -6,15 +6,17 @@ Vue.use(notivuecation);
 // define custom component
 Vue.component('custom-component', {
   mixins: [componentMixin],
-  template: `<div v-if="notification" style="width: 200px; background-color: grey">
-      <h1>{{title}}</h1>
-      <p>{{message}}</p>
-      
-      <button
-        v-for="button in buttons"
-        :class="button.css"
-        @click="resolve(button.value)"
-      >{{button.label}}</button>
+  template: `<div v-if="notification" class="notivuecation-overlay">
+      <div class="notivuecation-content">
+        <h1>{{title}}</h1>
+        <p>{{message}}</p>
+        
+        <button
+          v-for="button in buttons"
+          :class="button.css"
+          @click="resolve(button.value)"
+        >{{button.label}}</button>
+      </div>
     </div>`,
 });
 
