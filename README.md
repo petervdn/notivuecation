@@ -15,8 +15,8 @@ See some examples on the [demo page](https://petervdn.github.io/notivuecation/ex
 
 1 - Activate the plugin.
 ```javascript
-import notivuecation from 'notivuecation';
 import Vue from 'vue';
+import notivuecation from 'notivuecation';
 
 Vue.use(notivuecation);
 ```
@@ -146,7 +146,7 @@ Vue.component('my-custom-component', {
 }
 ```
 ## options
-When initializing the component, you can supply an optional second argument to set some options. The example below lists every possible property and shows the default value.  
+When initializing the plugin, you can supply an optional second argument to set some options. The example below lists every possible property and shows the default value.  
 ```javascript
 Vue.use(notivuecation, {
   addMethodsToVue: true,
