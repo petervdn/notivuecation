@@ -41,20 +41,20 @@ Vue.use(notivuecation);</code></pre>
 
       <h3>basic alert/confirm</h3>
       <p>Using predefined button labels, you can quickly open a confirm or alert popup by just supplying the message.</p>
-      <pre><code>this.$confirm('Are you sure you want to do this?');
-this.$alert('Please click ok');</code></pre>
+      <pre><code>confirm('Are you sure you want to do this?');
+alert('Please click ok');</code></pre>
       <button @click="showBasicConfirm">confirm</button>
       <button @click="showBasicAlert">alert</button>
 
       <h3>custom alert/confirm</h3>
       <p>Send an object instead of a string to define title, message and button labels.</p>
-      <pre><code>this.$confirm({
+      <pre><code>confirm({
   message: 'Are you sure you want to do this?',
   confirm: 'Yes!',
   cancel: 'Hell no',
 });
 
-this.$alert({
+alert({
   title: 'Important!',
   message: 'Please confirm',
   confirm: 'Sure!',
@@ -63,8 +63,8 @@ this.$alert({
       <button @click="showCustomAlert">alert</button>
 
       <h3>fully custom</h3>
-      <p>If you want fully custom buttons, you can call $notify directly and specify all buttons.</p>
-      <pre><code>this.$notify({
+      <p>If you want fully custom buttons, you can call notify directly and specify all buttons.</p>
+      <pre><code>notify({
   title: 'Custom title',
   message: 'Custom message',
   buttons: [
@@ -75,7 +75,8 @@ this.$alert({
 })</code></pre>
       <button @click="showFullCustom">custom</button>
 
-      <custom-component></custom-component>
+      <notivuecation></notivuecation>
+      <!--<custom-component></custom-component>-->
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>

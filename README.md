@@ -36,15 +36,17 @@ this.$confirm('Are you sure?').then(result => {
 ```
 
 ## overview
-The plugin adds three methods to the Vue instance:
-* `$notify`
-* `$alert`
-* `$confirm`
+The plugin exports three methods:
 
-### $notify
-The `$notify` method accepts an object that defines the title, a message and all buttons to show:
 ```javascript
-this.$notify({
+import { confirm, alert, notify } from 'notivuecation';
+```
+These are also added to the Vue instance under the following names: `$confirm`, `$alert` and `$notify`.
+
+### notify
+The `notify` is the base method of the plugin and is internally always used to show a notification. It accepts an object that defines the title, a message and all buttons to show:
+```javascript
+notify({
   title: 'Claim prize',
   message: 'What color should your car be?',
   buttons: [
@@ -54,13 +56,13 @@ this.$notify({
   ]
 });
 ```
-The optional `css` property on the buttons will be set as css class on the button, while the `value` will be used when resolving the promise (i.e. this is the value that will end up in the `then` when clicking the button).
+The optional `css` property on the buttons will be set as css class on the button, while the `value` (also optional) will be used when resolving the promise (i.e. this is the value that will end up in the `then` when clicking the button).
 
-### $confirm and $alert
-`$confirm` and `$alert` are shorthand methods that internally call `$notify` with some predefined data to cover most usecases. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
+### confirm and alert
+`confirm` and `alert` are shorthand methods that internally call `notify` with some predefined data to cover most usecases. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
 
 ```javascript
-this.$confirm({
+confirm({
   title: 'Warning!', // default is either 'Confirm' or 'Alert'
   message: 'Please confirm that you have read this.',
   confirm: 'Sure man', // default is 'Ok'
@@ -72,11 +74,11 @@ this.$confirm({
 
 Both methods can also be called with a string as argument, which is the same as using an object with only the `message` property set. So these two are equal:
 ```javascript
-this.$confirm('Are you sure?');
-this.$confirm({message: 'Are you sure?'});
+confirm('Are you sure?');
+confirm({message: 'Are you sure?'});
 ```
 
-When using `$confirm` or `$alert`, all confirm buttons will have the css-class `confirm` and all cancel buttons `cancel`.
+When using `confirm` or `alert`, all confirm buttons will have the css-class `confirm` and all cancel buttons `cancel`.
 
 ## styling
 The default component has some basic styling to overlay the content and show the message.
@@ -143,6 +145,10 @@ Vue.component('my-custom-component', {
   }
 }
 ```
-
-## limitations
-Multiple (or queued) notifications are not yet supported, so if a new one is triggered when there is already one in view, things may not work correctly (the new one is displayed, but the previous one will never be resolved).
+## options
+When initializing the component, you can supply an optional second argument to set some options. The example below lists every possible property and shows the default value.  
+```javascript
+Vue.use(notivuecation, {
+  addMethodsToVue: true,
+});
+```

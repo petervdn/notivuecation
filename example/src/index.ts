@@ -1,4 +1,4 @@
-import notivuecation, { componentMixin } from '../../src';
+import notivuecation, { confirm, alert, notify, componentMixin } from '../../src';
 
 declare const Vue;
 Vue.use(notivuecation);
@@ -24,7 +24,7 @@ new Vue({
   el: '#app',
   methods: {
     showFullCustom() {
-      this.$notify({
+      notify({
         title: 'Custom title',
         message: 'Custom message.',
         buttons: [
@@ -37,24 +37,24 @@ new Vue({
       })
     },
     showBasicConfirm() {
-      this.$confirm('Are you sure you want to do this?').then(result => {
+      confirm('Are you sure you want to do this?').then(result => {
         console.log(result);
       });
     },
     showCustomConfirm() {
-      this.$confirm({ message: 'Are you sure you want to do this?', confirm: 'Yes!', cancel: 'Hell no' }).then(result => {
+      confirm({ message: 'Are you sure you want to do this?', confirm: 'Yes!', cancel: 'Hell no' }).then(result => {
         console.log(result);
       });
     },
     showCustomAlert() {
-      this.$alert({
+      alert({
         title: 'Error!',
         message: 'Something went wrong',
         confirm: 'Bummer',
       });
     },
     showBasicAlert() {
-      this.$alert('Please click ok').then(result => {
+      alert('Please click ok').then(result => {
         console.log(result);
       });
     },

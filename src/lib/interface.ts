@@ -1,6 +1,6 @@
 export interface IButton {
   label: string;
-  css: string;
+  css?: string;
   value?: any;
 }
 
@@ -11,9 +11,13 @@ export interface IINotificationLabels {
   cancel?: string;
 }
 
-export interface INotificationData {
-  resolve: (result: any) => void;
+export interface INotifyParams {
   message: string;
   title: string;
   buttons: IButton[];
+  resolve?: (result: any) => void;
+}
+
+export interface IOptions {
+  addMethodsToVue?: boolean;
 }

@@ -1,5 +1,5 @@
 import NotificationType from './NotificationType';
-import { IINotificationLabels, INotificationData } from './interface';
+import { IINotificationLabels, INotifyParams } from './interface';
 
 const defaultLabels = {
   confirmOk: 'Ok',
@@ -13,7 +13,7 @@ const defaultCssClasses = {
 
 export const createShowActionForType = (
   type: NotificationType,
-  notifyMethod: (payload: INotificationData) => Promise<any>,
+  notifyMethod: (payload: INotifyParams) => Promise<any>,
 ) => (param: IINotificationLabels | string) => {
   const labels = {
     confirmOkLabel:
