@@ -1,4 +1,4 @@
-import { notivuecation, componentMixin } from '../../src';
+import notivuecation, { componentMixin } from '../../src';
 
 declare const Vue;
 Vue.use(notivuecation);
@@ -48,9 +48,9 @@ new Vue({
     },
     showCustomAlert() {
       this.$alert({
-        title: 'Important!',
-        message: 'Please confirm',
-        confirm: 'Sure!',
+        title: 'Error!',
+        message: 'Something went wrong',
+        confirm: 'Bummer',
       });
     },
     showBasicAlert() {
