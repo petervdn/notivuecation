@@ -20,4 +20,5 @@ export interface INotifyParams {
 
 export interface IOptions {
   addMethodsToVue?: boolean;
+  componentName?: string;
 }
