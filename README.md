@@ -1,16 +1,12 @@
 # notivuecation
 
-Promise-based alert and confirm modal for Vue.js. 
+Promise-based alert and confirm modal for Vue.js. See some examples on the [demo page](https://petervdn.github.io/notivuecation/example/).
 
 ## install
 
 ```sh
 npm install notivuecation
 ```
-
-## demo
-See some examples on the [demo page](https://petervdn.github.io/notivuecation/example/).
-
 ## basic usage
 
 1 - Activate the plugin.
