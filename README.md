@@ -15,7 +15,7 @@ See some examples on the [demo page](https://petervdn.github.io/notivuecation/ex
 
 1 - Activate the plugin.
 ```javascript
-import { notivuecation } from 'notivuecation';
+import notivuecation from 'notivuecation';
 import Vue from 'vue';
 
 Vue.use(notivuecation);
