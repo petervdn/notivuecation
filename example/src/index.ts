@@ -32,19 +32,13 @@ new Vue({
           {label: 'option #2', value: 2},
           {label: 'option #3', value: 3},
         ]
-      }).then(result => {
-        console.log(result);
-      })
+      }).then(console.log)
     },
     showBasicConfirm() {
-      confirm('Are you sure you want to do this?').then(result => {
-        console.log(result);
-      });
+      confirm('Are you sure you want to do this?').then(console.log);
     },
     showCustomConfirm() {
-      confirm({ message: 'Are you sure you want to do this?', confirm: 'Yes!', cancel: 'Hell no' }).then(result => {
-        console.log(result);
-      });
+      confirm({ message: 'Are you sure you want to do this?', confirm: 'Yes!', cancel: 'Hell no' }).then(console.log);
     },
     showCustomAlert() {
       alert({
@@ -54,9 +48,18 @@ new Vue({
       });
     },
     showBasicAlert() {
-      alert('Please click ok').then(result => {
-        console.log(result);
-      });
+      alert('Please click ok').then(console.log);
+    },
+    onQueueDemoClick() {
+      console.log(123);
+      confirm('First confirm').then(console.log);
+
+      setTimeout(() => {
+        confirm('Second confirm').then(console.log);
+      }, 1000);
+      setTimeout(() => {
+        confirm('Third confirm').then(console.log);
+      }, 2000);
     },
   },
 });

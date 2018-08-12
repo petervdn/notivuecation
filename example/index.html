@@ -62,7 +62,7 @@ alert({
       <button @click="showCustomConfirm">confirm</button>
       <button @click="showCustomAlert">alert</button>
 
-      <h3>fully custom</h3>
+      <h3>notify</h3>
       <p>If you want fully custom buttons, you can call notify directly and specify all buttons.</p>
       <pre><code>notify({
   title: 'Custom title',
@@ -74,6 +74,10 @@ alert({
   ]
 })</code></pre>
       <button @click="showFullCustom">custom</button>
+
+      <h3>queues</h3>
+      <p>In the case of multiple notifications, every one will be added to a queue. Clicking the button below will trigger 3 confirmations, each one added a second after the previous one.</p>
+      <button @click="onQueueDemoClick">queue demo</button>
 
       <notivuecation></notivuecation>
       <!--<custom-component></custom-component>-->
