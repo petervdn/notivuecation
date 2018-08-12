@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-describe('Example', () => {
+describe('notivuecation', () => {
   it('should pass', () => {
     expect(true).to.equal(true);
   });

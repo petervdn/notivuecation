@@ -1,7 +1,7 @@
 import NotificationType from './NotificationType';
 import events from './events';
 import Notification from './Notification.vue';
-import { createShowActionForType } from './utils';
+import { createNotifyParams } from './utils';
 import { IINotificationLabels, INotifyParams, IOptions } from './interface';
 
 // main methods
@@ -15,12 +15,12 @@ export function notify(params: INotifyParams): Promise<any> {
   });
 }
 
-export const confirm: (
-  param: IINotificationLabels | string,
-) => Promise<any> = createShowActionForType(NotificationType.CONFIRM, notify);
-export const alert: (
-  param: IINotificationLabels | string,
-) => Promise<any> = createShowActionForType(NotificationType.ALERT, notify);
+export function confirm(param: IINotificationLabels | string): Promise<any> {
+  return notify(createNotifyParams(param, NotificationType.CONFIRM));
+}
+export function alert(param: IINotificationLabels | string): Promise<any> {
+  return notify(createNotifyParams(param, NotificationType.ALERT));
+}
 
 export let eventBus: any; // todo type?
 

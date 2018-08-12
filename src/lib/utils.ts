@@ -11,10 +11,10 @@ const defaultCssClasses = {
   cancel: 'cancel',
 };
 
-export const createShowActionForType = (
+export function createNotifyParams(
+  param: IINotificationLabels | string,
   type: NotificationType,
-  notifyMethod: (payload: INotifyParams) => Promise<any>,
-) => (param: IINotificationLabels | string) => {
+): INotifyParams {
   const labels = {
     confirmOkLabel:
       typeof param !== 'string' && param.confirm ? param.confirm : defaultLabels.confirmOk,
@@ -53,5 +53,5 @@ export const createShowActionForType = (
 
   data.title = typeof param !== 'string' && param.title !== void 0 ? param.title : defaultTitle;
 
-  return notifyMethod(data);
-};
+  return data;
+}

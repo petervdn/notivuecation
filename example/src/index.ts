@@ -51,7 +51,6 @@ new Vue({
       alert('Please click ok').then(console.log);
     },
     onQueueDemoClick() {
-      console.log(123);
       confirm('First confirm').then(console.log);
 
       setTimeout(() => {
