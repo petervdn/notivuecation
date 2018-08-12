@@ -24,6 +24,7 @@ export function createNotifyParams(
   };
 
   const data: any = {
+    type,
     buttons: [],
     message: typeof param === 'string' ? param : param.message,
   };

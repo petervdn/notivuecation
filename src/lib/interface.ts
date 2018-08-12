@@ -1,3 +1,5 @@
+import NotificationType from './NotificationType';
+
 export interface IButton {
   label: string;
   css?: string;
@@ -15,6 +17,10 @@ export interface INotifyParams {
   message: string;
   title: string;
   buttons: IButton[];
+  type?: NotificationType;
+}
+
+export interface INotificationData extends INotifyParams {
   resolve?: (result: any) => void;
 }
 

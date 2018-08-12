@@ -2,15 +2,16 @@ import NotificationType from './NotificationType';
 import events from './events';
 import Notification from './Notification.vue';
 import { createNotifyParams } from './utils';
-import { IINotificationLabels, INotifyParams, IOptions } from './interface';
+import { IINotificationLabels, INotificationData, INotifyParams, IOptions } from './interface';
 
 // main methods
 export function notify(params: INotifyParams): Promise<any> {
+  const data: INotificationData = { ...params };
   return new Promise(resolve => {
-    params.resolve = resolve;
-    eventBus.$emit(events.SHOW_NOTIFICATION, params);
+    data.resolve = resolve;
+    eventBus.$emit(events.SHOW_NOTIFICATION, data);
   }).then(result => {
-    eventBus.$emit(events.HIDE_NOTIFICATION, params);
+    eventBus.$emit(events.HIDE_NOTIFICATION, data);
     return result;
   });
 }
