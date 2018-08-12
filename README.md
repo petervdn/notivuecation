@@ -18,7 +18,7 @@ Vue.use(notivuecation);
 ```
 
 2 - Add the component that renders the notifications. You probably want to put this somewhere in the root component of your site, so it can always be visible. There is a simple component (named `notivuecation`) available, but you can also create and use your own.
-```html
+```
 <notivuecation />
 ```
 
@@ -88,7 +88,7 @@ For your own project you might want to use custom styling for the notification i
 There are some basic styles and simple classes which you can override easily.
 A small example when using CSS Modules (with SCSS) in your Vue project.
 
-```html
+```
 <notivuecation :class="$style.notification" />
 ```
 
