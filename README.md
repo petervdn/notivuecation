@@ -19,7 +19,7 @@ Vue.use(notivuecation);
 
 2 - Add the component that renders the notifications. You probably want to put this somewhere in the root component of your site, so it can always be visible. There is a simple component (named `notivuecation`) available, but you can also create and use your own.
 ```html
-<notivuecation />
+<notivuecation></notivuecation>
 ```
 
 3 - Call `$alert` or `$confirm` from any Vue component:
@@ -34,7 +34,7 @@ this.$confirm('Are you sure?').then(result => {
 ## overview
 The plugin adds three methods to the Vue instance, and can be called from any Vue component:
 
-* `notify`
+* `$notify`
 * `$confirm`
 * `$alert`
 
@@ -89,7 +89,7 @@ There are some basic styles and simple classes which you can override easily.
 A small example when using CSS Modules (with SCSS) in your Vue project.
 
 ```html
-<notivuecation :class="$style.notification" />
+<notivuecation :class="$style.notification"></notivuecation>
 ```
 
 ```scss
