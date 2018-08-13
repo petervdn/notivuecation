@@ -163,5 +163,5 @@ Vue.use(notivuecation, {
 The available options are:
 
 * `addMethodsToVue`: Whether the `notify`, `alert` and `confirm` methods should be added to the Vue instance. Default: `true`.
-* `componentName`: Name of the default component. Default: `'notifvuecation'` . This defines the element name you should use for the component: `<notivuecation />`
+* `componentName`: Name of the default component. Default: `'notivuecation'` . This defines the element name you should use for the component: `<notivuecation />`
 * `getButtonForEscape`: A function that gets the notification-data as argument and returns the button (or nothing) that will be used when pressing the escape key. The default will make the key work in two cases: the cancel button for a `confirm` call, or the single button when there is only one. If you don't want it to do anything, you can nullify the property: `{ getButtonForEscape: null }`.
