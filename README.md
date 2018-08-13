@@ -153,10 +153,15 @@ While the idea of a modal window is to prevent any other interaction until the u
 In this plugin, every new notification is simply added to the end of a queue. When closing a notification and there are more queued, the next one will simply show up.  
 
 ## options
-When initializing the plugin, you can supply an optional second argument to set some options. The example below lists every possible property and shows the default value.  
+When initializing the plugin, you can supply an optional second argument to set some options. 
+
 ```javascript
 Vue.use(notivuecation, {
-  addMethodsToVue: true, // add methods to the Vue instacne
-  componentName: 'notivuecation', // name of the default custom element: <notivucation />
+  someOption: 'someValue',
 });
 ```
+The available options are:
+
+* `addMethodsToVue`: Whether the `notify`, `alert` and `confirm` methods should be added to the Vue instance. Default: `true`.
+* `componentName`: Name of the default custom component. Default: `'notifvuecation'` . This defines the element name you should use: `<notivuecation />`
+* `getButtonForEscape`: A function that gets the notification-data as argument and returns the button (or nothing) that will be used when pressing the escape key. The default will make the key work in two cases: the cancel button for a `confirm` call, or the single button when there is only one. If you don't want it to do anything, you can nullify the property: `{ getButtonForEscape: null }`.

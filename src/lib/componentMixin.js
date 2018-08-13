@@ -18,7 +18,7 @@ export default {
       }
     },
     onEscapeUp(event) {
-      if (event.keyCode === 27 && this.notification) {
+      if (event.keyCode === 27 && this.notification && options.getButtonForEscape) {
         const buttonForEscape = options.getButtonForEscape(this.notification);
         if (buttonForEscape) {
           this.resolve(buttonForEscape.value);

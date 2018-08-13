@@ -1,7 +1,7 @@
 import NotificationType from './NotificationType';
 import events from './events';
 import Notification from './Notification.vue';
-import { createNotificationLabels, createNotifyParams } from './utils';
+import { createNotificationLabels, createNotifyParams, defaultGetButtonForEscape } from './utils';
 import { INotificationData, INotifyParams, IOptions, LabelsOrString } from './interface';
 
 // main methods
@@ -28,18 +28,7 @@ export let eventBus: any; // todo type?
 const defaultOptions: IOptions = {
   addMethodsToVue: true,
   componentName: 'notivuecation',
-  getButtonForEscape: (notification: INotificationData) => {
-    if (notification.type === NotificationType.CONFIRM) {
-      // cancel button in a confirm dialog
-      return notification.buttons.find(button => button.value === false);
-    }
-    if (notification.buttons.length === 1) {
-      // or if there is 1 button
-      return notification.buttons[0];
-    }
-
-    return null;
-  },
+  getButtonForEscape: defaultGetButtonForEscape,
 };
 
 // define as empty object so we can export it

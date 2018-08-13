@@ -1,5 +1,11 @@
 import NotificationType from './NotificationType';
-import { IButton, IINotificationLabels, INotifyParams, LabelsOrString } from './interface';
+import {
+  IButton,
+  IINotificationLabels,
+  INotificationData,
+  INotifyParams,
+  LabelsOrString,
+} from './interface';
 
 const defaultLabels = {
   confirmOk: 'Ok',
@@ -68,4 +74,17 @@ export function createNotifyParams(
     title,
     message: notificationLabels.message,
   };
+}
+
+export function defaultGetButtonForEscape(notification: INotificationData): IButton {
+  if (notification.type === NotificationType.CONFIRM) {
+    // cancel button in a confirm dialog
+    return notification.buttons.find(button => button.value === false);
+  }
+  if (notification.buttons.length === 1) {
+    // or if there is 1 button
+    return notification.buttons[0];
+  }
+
+  return null;
 }
