@@ -148,12 +148,12 @@ Vue.component('my-custom-component', {
 });
 ```
 ## queueing
-While the idea of a modal window is to prevent any other interaction until the user has interacted with the modal, it can happen (due to async processes for example) that a notification is opened while there is already one visible.
+While the idea of a modal window is to prevent all interaction until the user has interacted with the modal, it can occur that a notification is opened while there is already one visible.
 
 What happens is that every new notification is simply added to the end of a queue. When closing a notification and there are more waiting, the next one will simply show up until the queue is empty.  
 
 ## options
-When initializing the plugin, you can supply an optional second argument to set some options. 
+When initializing the plugin, you can supply an object as second argument to set some options. 
 
 ```javascript
 Vue.use(notivuecation, {
