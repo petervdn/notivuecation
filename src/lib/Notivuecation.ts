@@ -28,12 +28,26 @@ export let eventBus: any; // todo type?
 const defaultOptions: IOptions = {
   addMethodsToVue: true,
   componentName: 'notivuecation',
+  getButtonForEscape: (notification: INotificationData) => {
+    if (notification.type === NotificationType.CONFIRM) {
+      // cancel button in a confirm dialog
+      return notification.buttons.find(button => button.value === false);
+    }
+    if (notification.buttons.length === 1) {
+      // or if there is 1 button
+      return notification.buttons[0];
+    }
+
+    return null;
+  },
 };
+
+export const options: IOptions = {};
 
 export default {
   install(Vue, userOptions: IOptions = {}) {
     // todo type vue?
-    const options = Object.assign({}, defaultOptions, userOptions);
+    Object.assign(options, defaultOptions, userOptions); // todo better way to export options obj?
 
     eventBus = new Vue();
 

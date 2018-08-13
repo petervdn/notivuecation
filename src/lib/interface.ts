@@ -27,4 +27,5 @@ export interface INotificationData extends INotifyParams {
 export interface IOptions {
   addMethodsToVue?: boolean;
   componentName?: string;
+  getButtonForEscape?: (notification: INotificationData) => IButton;
 }

@@ -1,5 +1,5 @@
 import events from './events';
-import { eventBus } from './Notivuecation';
+import { eventBus, options } from './Notivuecation';
 
 export default {
   data() {
@@ -17,10 +17,20 @@ export default {
         this.notifications.splice(index, 1);
       }
     },
+    onEscapeUp(event) {
+      if (event.keyCode === 27 && this.notification) {
+        const buttonForEscape = options.getButtonForEscape(this.notification);
+        if (buttonForEscape) {
+          this.resolve(buttonForEscape.value);
+        }
+      }
+    },
   },
   mounted() {
     eventBus.$on(events.SHOW_NOTIFICATION, this.onShowNotification);
     eventBus.$on(events.HIDE_NOTIFICATION, this.onHideNotification);
+
+    window.addEventListener('keyup', this.onEscapeUp);
   },
   computed: {
     resolve() {
