@@ -45,7 +45,7 @@ new Vue({
         title: 'Error!',
         message: 'Something went wrong',
         confirm: 'Bummer',
-      });
+      }).then(console.log);
     },
     showBasicAlert() {
       alert('Please click ok').then(console.log);

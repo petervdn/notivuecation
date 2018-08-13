@@ -1,8 +1,8 @@
 import NotificationType from './NotificationType';
 import events from './events';
 import Notification from './Notification.vue';
-import { createNotifyParams } from './utils';
-import { IINotificationLabels, INotificationData, INotifyParams, IOptions } from './interface';
+import { createNotificationLabels, createNotifyParams } from './utils';
+import { INotificationData, INotifyParams, IOptions, LabelsOrString } from './interface';
 
 // main methods
 export function notify(params: INotifyParams): Promise<any> {
@@ -16,11 +16,11 @@ export function notify(params: INotifyParams): Promise<any> {
   });
 }
 
-export function confirm(param: IINotificationLabels | string): Promise<any> {
-  return notify(createNotifyParams(param, NotificationType.CONFIRM));
+export function confirm(param: LabelsOrString): Promise<any> {
+  return notify(createNotifyParams(createNotificationLabels(param), NotificationType.CONFIRM));
 }
-export function alert(param: IINotificationLabels | string): Promise<any> {
-  return notify(createNotifyParams(param, NotificationType.ALERT));
+export function alert(param: LabelsOrString): Promise<any> {
+  return notify(createNotifyParams(createNotificationLabels(param), NotificationType.ALERT));
 }
 
 export let eventBus: any; // todo type?
@@ -42,12 +42,13 @@ const defaultOptions: IOptions = {
   },
 };
 
+// define as empty object so we can export it
 export const options: IOptions = {};
 
 export default {
   install(Vue, userOptions: IOptions = {}) {
     // todo type vue?
-    Object.assign(options, defaultOptions, userOptions); // todo better way to export options obj?
+    Object.assign(options, defaultOptions, userOptions);
 
     eventBus = new Vue();
 

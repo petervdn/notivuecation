@@ -1,5 +1,5 @@
 import NotificationType from './NotificationType';
-import { IINotificationLabels, INotifyParams } from './interface';
+import { IButton, IINotificationLabels, INotifyParams, LabelsOrString } from './interface';
 
 const defaultLabels = {
   confirmOk: 'Ok',
@@ -11,48 +11,61 @@ const defaultCssClasses = {
   cancel: 'cancel',
 };
 
+/**
+ * Converts LabelsOrString to IINotificationLabels
+ * @param param
+ */
+export function createNotificationLabels(param: LabelsOrString): IINotificationLabels {
+  return typeof param === 'string' ? { message: param } : param;
+}
+
+/**
+ * Create the data-object that is needed to call the notify method.
+ * @param notificationLabels
+ * @param type
+ */
 export function createNotifyParams(
-  param: IINotificationLabels | string,
+  notificationLabels: IINotificationLabels,
   type: NotificationType,
 ): INotifyParams {
   const labels = {
-    confirmOkLabel:
-      typeof param !== 'string' && param.confirm ? param.confirm : defaultLabels.confirmOk,
-    alertOkLabel:
-      typeof param !== 'string' && param.confirm ? param.confirm : defaultLabels.alertOk,
-    cancel: typeof param !== 'string' && param.cancel ? param.cancel : defaultLabels.cancel,
+    confirmOk: notificationLabels.confirm || defaultLabels.confirmOk,
+    alertOk: notificationLabels.confirm || defaultLabels.alertOk,
+    cancel: notificationLabels.cancel || defaultLabels.cancel,
   };
 
-  const data: any = {
-    type,
-    buttons: [],
-    message: typeof param === 'string' ? param : param.message,
-  };
-
-  const confirmButton = {
-    label: labels.confirmOkLabel,
-    value: true,
-    css: defaultCssClasses.confirm,
-  };
-
-  let defaultTitle;
-
+  let buttons: IButton[];
+  let title: string;
   if (type === NotificationType.ALERT) {
-    data.buttons = [confirmButton];
-    defaultTitle = 'Alert';
+    buttons = [
+      {
+        label: labels.alertOk,
+        css: defaultCssClasses.confirm,
+      },
+    ];
+    title = notificationLabels.title || 'Alert';
   } else if (type === NotificationType.CONFIRM) {
-    const cancelButton = {
-      label: labels.cancel,
-      value: false,
-      css: defaultCssClasses.cancel,
-    };
-    data.buttons = [confirmButton, cancelButton];
-    defaultTitle = 'Confirm';
+    buttons = [
+      {
+        label: labels.confirmOk,
+        value: true,
+        css: defaultCssClasses.confirm,
+      },
+      {
+        label: labels.cancel,
+        value: false,
+        css: defaultCssClasses.cancel,
+      },
+    ];
+    title = notificationLabels.title || 'Confirm';
   } else {
     throw new Error(`Unknown type: ${type}`);
   }
 
-  data.title = typeof param !== 'string' && param.title !== void 0 ? param.title : defaultTitle;
-
-  return data;
+  return {
+    type,
+    buttons,
+    title,
+    message: notificationLabels.message,
+  };
 }

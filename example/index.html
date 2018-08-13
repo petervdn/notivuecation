@@ -33,7 +33,7 @@
   <body style="padding: 0 20px 20px 20px">
     <div id="app">
       <h1>notivuecation</h1>
-      <p>Promise-based alert/confirm modal for Vue.js. Results are be logged to the console. Note that the styling and looks are completely up to you.</p>
+      <p>Promise-based alert/confirm modal for Vue.js. Results are logged to the console. Note that this is not a demo to show the looks of the notifications, the styling is completely up to you.</p>
 
       <h3>init</h3><pre><code>import notivuecation from 'notivuecation';
 
@@ -75,8 +75,8 @@ alert({
 })</code></pre>
       <button @click="showFullCustom">custom</button>
 
-      <h3>queues</h3>
-      <p>In the case of multiple notifications, every one will be added to a queue. Clicking the button below will trigger 3 confirmations, each one added a second after the previous one.</p>
+      <h3>queue</h3>
+      <p>Every notification will be added to the queue and removed if closed, so multiple notifications may appear sequentially. Clicking the button below will trigger 3 confirmations, each one added a second after the previous one.</p>
       <button @click="onQueueDemoClick">queue demo</button>
 
       <notivuecation></notivuecation>

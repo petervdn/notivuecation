@@ -29,3 +29,5 @@ export interface IOptions {
   componentName?: string;
   getButtonForEscape?: (notification: INotificationData) => IButton;
 }
+
+export type LabelsOrString = IINotificationLabels | string;
