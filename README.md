@@ -32,7 +32,7 @@ this.$confirm('Are you sure?').then(result => {
 ```
 
 ## overview
-The plugin adds three methods to the Vue instance, and can be called from any Vue component:
+The plugin adds three methods to the Vue instance, these can be called from any Vue component:
 
 * `$notify`
 * `$confirm`
@@ -111,7 +111,7 @@ Which would make the notification mask lighter, the content background black and
 
 
 ## custom component
-If you want to use your own component for displaying the notification, just add the `componentMixin` to your component's mixins. It will add the following properties to the component: `title`, `buttons`, `message`, `resolve` and `notification`.
+If you want to use your own component for displaying the notification, just add the `componentMixin` to your component's mixins. It will add the following properties to the component: `title`, `buttons`, `message`, `type`, `resolve` and `notification`.
 
 ```javascript
 import { componentMixin } from 'notivuecation';
@@ -150,7 +150,7 @@ Vue.component('my-custom-component', {
 ## queueing
 While the idea of a modal window is to prevent any other interaction until the user has interacted with the modal, it can happen (due to async processes for example) that a notification is opened while there is already one visible.
 
-In this plugin, every new notification is simply added to the end of a queue. When closing a notification and there are more queued, the next one will simply show up.  
+What happens is that every new notification is simply added to the end of a queue. When closing a notification and there are more waiting, the next one will simply show up until the queue is empty.  
 
 ## options
 When initializing the plugin, you can supply an optional second argument to set some options. 
