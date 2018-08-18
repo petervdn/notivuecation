@@ -1,12 +1,22 @@
 # notivuecation
 
-Promise-based alert and confirm modal for Vue.js. See some examples on the [demo page](https://petervdn.github.io/notivuecation/example/).
+Promise-based alert and confirm modal for Vue.js. 
 
 ## install
 
 ```sh
 npm install notivuecation
 ```
+## example
+Run the demo in the example folder:
+```sh 
+cd example
+npm install
+npm run dev
+```
+
+Or you can check out that exact same page [here](https://petervdn.github.io/notivuecation/example/).
+
 ## basic usage
 
 1 - Activate the plugin.
@@ -43,7 +53,7 @@ If you want to use these methods from outside a component, you can also import t
 ```javascript
 import { confirm, alert, notify } from 'notivuecation';
 ```
-
+(this will obviously replace the native `confirm` and `alert` methods in the current scope)  
 
 ### notify
 The `notify` method is the base of the plugin and is internally always used to show any notification. It accepts an object that defines the title, a message and all buttons to show:
