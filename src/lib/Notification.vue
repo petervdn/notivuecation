@@ -1,8 +1,8 @@
 <template>
   <div class="notivuecation-overlay" v-if="notification">
     <div class="notivuecation-content">
-      <h3>{{ title }}</h3>
-      <p>{{ message }}</p>
+      <h3 v-html="title"></h3>
+      <p v-html="message"></p>
 
       <div class="notivuecation-buttons">
         <button
