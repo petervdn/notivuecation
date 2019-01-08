@@ -50,6 +50,7 @@ export default {
     },
   },
   beforeDestroy() {
+    window.removeEventListener('keyup', this.onEscapeUp);
     eventBus.$off(events.SHOW_NOTIFICATION, this.onShowNotification);
     eventBus.$off(events.HIDE_NOTIFICATION, this.onHideNotification);
   },
