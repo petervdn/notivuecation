@@ -71,7 +71,7 @@ this.$notify({
 The optional `css` property on the buttons will be set as css class on the button, while the `value` (also optional) will be used when resolving the promise (i.e. this is the value that will end up in the `then` when clicking the button).
 
 ### confirm and alert
-`confirm` and `alert` are shorthand methods that call `notify` with some predefined data to cover most usecases. These two methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
+`confirm` and `alert` are shorthand methods that call `notify` with some predefined data to cover most usecases. Use these methods to show either a notification with Ok/Cancel buttons or just a single Ok-button. Both accept roughly the same parameters object:
 
 ```javascript
 this.$confirm({

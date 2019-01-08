@@ -4,6 +4,8 @@ import Notification from './Notification.vue';
 import { createNotificationLabels, createNotifyParams, defaultGetButtonForEscape } from './utils';
 import { INotificationData, INotifyParams, IOptions, LabelsOrString } from './interface';
 
+export let eventBus: any; // todo type?
+
 // main methods
 export function notify(params: INotifyParams): Promise<any> {
   const data: INotificationData = { ...params };
@@ -22,8 +24,6 @@ export function confirm(param: LabelsOrString): Promise<any> {
 export function alert(param: LabelsOrString): Promise<any> {
   return notify(createNotifyParams(createNotificationLabels(param), NotificationType.ALERT));
 }
-
-export let eventBus: any; // todo type?
 
 const defaultOptions: IOptions = {
   addMethodsToVue: true,
