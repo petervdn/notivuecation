@@ -60,7 +60,7 @@ The `notify` method is the base of the plugin and is internally always used to s
 ```javascript
 this.$notify({
   title: 'Claim prize',
-  message: 'What color should your car be?',
+  message: 'Pick a color for your car!',
   buttons: [
     {label: 'red', value: 1, css: 'red'},
     {label: 'green', value: 2, css: 'green'},
@@ -144,7 +144,7 @@ Vue.component('custom-component', {
 __Make sure to use `v-if="notification"` (or `v-show`) to show or hide the notification.__
 
 
-If your component needs to do specific logic (like validation or animations), the only thing you need to eventually do is call `this.resolve(someValue)`.
+If your component needs to do specific logic (like validation or animations), the only thing you need to call in the end is `this.resolve(someValue)`.
 ```javascript
 Vue.component('my-custom-component', {
   mixins: [componentMixin],
@@ -174,4 +174,4 @@ The available options are:
 
 * `addMethodsToVue`: Whether the `notify`, `alert` and `confirm` methods should be added to the Vue instance. Default: `true`.
 * `componentName`: Name of the default component. Default: `'notivuecation'` . This defines the element name you should use for the component: `<notivuecation />`
-* `getButtonForEscape`: A function that gets the notification-data as argument and returns the button (or nothing) that will be used when pressing the escape key. The default will make the key work in two cases: the cancel button for a `confirm` call, or the single button when there is only one. If you don't want it to do anything, you can nullify the property: `{ getButtonForEscape: null }`.
+* `getButtonForEscape`: Can make the escape-key close a notification in certain cases. A function should be set (which receives the notification-data as argument) that returns the button that will be used when pressing the escape key. The default will make the key work in two cases: the cancel button for a `confirm` call, or the single button when there is only one. If you don't want the escape key to do anything, you can set the property to null.
