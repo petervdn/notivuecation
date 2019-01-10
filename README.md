@@ -162,6 +162,17 @@ While the idea of a modal window is to prevent all interaction until the user ha
 
 What happens is that every new notification is simply added to the end of a queue. When closing a notification and there are more waiting, the next one will simply show up until the queue is empty.  
 
+## events
+If your application needs to react to notifications, you can listen to the show and hide events:
+
+ ```javascript
+import { getEventBus, events } from 'notivuecation';
+
+getEventBus().$on(events.SHOW_NOTIFICATION, () => {});
+getEventBus().$on(events.HIDE_NOTIFICATION, () => {});
+
+```
+
 ## options
 When initializing the plugin, you can supply an object as second argument to set some options. 
 
