@@ -24,7 +24,14 @@ export function alert(param: LabelsOrString): Promise<any> {
   return notify(createNotifyParams(createNotificationLabels(param), NotificationType.ALERT));
 }
 
-export let eventBus: Vue;
+let eventBus: Vue;
+
+export const getEventBus = (): Vue => {
+  if (eventBus === undefined) {
+    throw new Error('Plugin has not been initialized yet, cannot get eventBus');
+  }
+  return eventBus;
+};
 
 const defaultOptions: IOptions = {
   addMethodsToVue: true,

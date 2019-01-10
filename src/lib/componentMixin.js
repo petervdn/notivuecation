@@ -1,5 +1,5 @@
 import events from './events';
-import { eventBus, options } from './Notivuecation';
+import { getEventBus, options } from './Notivuecation';
 
 export default {
   data() {
@@ -27,8 +27,8 @@ export default {
     },
   },
   mounted() {
-    eventBus.$on(events.SHOW_NOTIFICATION, this.onShowNotification);
-    eventBus.$on(events.HIDE_NOTIFICATION, this.onHideNotification);
+    getEventBus().$on(events.SHOW_NOTIFICATION, this.onShowNotification);
+    getEventBus().$on(events.HIDE_NOTIFICATION, this.onHideNotification);
 
     window.addEventListener('keyup', this.onEscapeUp);
   },
@@ -51,7 +51,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('keyup', this.onEscapeUp);
-    eventBus.$off(events.SHOW_NOTIFICATION, this.onShowNotification);
-    eventBus.$off(events.HIDE_NOTIFICATION, this.onHideNotification);
+    getEventBus().$off(events.SHOW_NOTIFICATION, this.onShowNotification);
+    getEventBus().$off(events.HIDE_NOTIFICATION, this.onHideNotification);
   },
 };
